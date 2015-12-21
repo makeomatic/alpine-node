@@ -3,14 +3,22 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 PKG_NAME := $(shell cat package.json | ./node_modules/.bin/json name)
 PKG_VERSION := $(shell cat package.json | ./node_modules/.bin/json version)
 NPM_PROXY := http://$(shell docker-machine ip dev):4873
-DIST := makeomatic/$(PKG_NAME)
-NODE_VERSIONS := 5.3.0 5.2.0 5.1.1 4.2.3
-ENVS := .development .production
-TASK_LIST := $(foreach env,$(ENVS),$(addsuffix $(env), $(NODE_VERSIONS)))
+DOCKER_USER := makeomatic
+DIST := $(DOCKER_USER)/$(PKG_NAME)
+NODE_VERSIONS := 5.3.0 4.2.3
+ENVS := development production
+TASK_LIST := $(foreach env,$(ENVS),$(addsuffix .$(env), $(NODE_VERSIONS)))
+WORKDIR := /src
+COMPOSE_FILE := test/docker-compose.yml
 
-%.test:
-	@echo "no test present"
-	exit 1;
+test: mocha
+
+%.mocha: IMAGE=$(DOCKER_USER)/alpine-node:$(NODE_VERSION)
+%.mocha: COMPOSE = DIR=$(WORKDIR) $(IMAGE) docker-compose -f $(COMPOSE_FILE)
+%.production.mocha:
+	docker pull $(IMAGE)
+	$(COMPOSE) run --rm tester npm test
+%.mocha: ;
 
 %.build: ARGS = --build-arg NODE_ENV=$(NODE_ENV) --build-arg NPM_PROXY=$(NPM_PROXY)
 %.build:
@@ -21,6 +29,13 @@ TASK_LIST := $(foreach env,$(ENVS),$(addsuffix $(env), $(NODE_VERSIONS)))
 %.production.build:
 	docker tag -f $(PKG_PREFIX_ENV) $(PKG_PREFIX)
 	docker tag -f $(PKG_PREFIX_ENV) $(PKG_PREFIX)-$(PKG_VERSION)
+
+%.development.pull:
+	docker pull $(PKG_PREFIX_ENV)
+
+%.pull:
+	docker pull $(PKG_PREFIX)
+	docker pull $(PKG_PREFIX)-$(PKG_VERSION)
 
 %.push:
 	docker push $(PKG_PREFIX_ENV)
@@ -40,4 +55,4 @@ all: test build push
 	@echo $@  # print target name
 	$(MAKE) -f $(THIS_FILE) $(addsuffix .$@, $(TASK_LIST))
 
-.PHONY: all %.test %.build %.push
+.PHONY: all %.mocha %.build %.push %.pull
