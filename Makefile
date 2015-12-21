@@ -12,6 +12,6 @@ all: build push
 
 %::
 	@echo $@  # print target name
-	@$(MAKE) -f $(THIS_FILE) -j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) $(addsuffix .$@, $(NODE_VERSIONS))
+	@$(MAKE) -f $(THIS_FILE) $(addsuffix .$@, $(NODE_VERSIONS))
 
 .PHONY: all %.build %.push
