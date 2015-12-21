@@ -14,7 +14,7 @@ COMPOSE_FILE := test/docker-compose.yml
 test: mocha
 
 %.mocha: IMAGE=$(DOCKER_USER)/alpine-node:$(NODE_VERSION)
-%.mocha: COMPOSE = DIR=$(WORKDIR) $(IMAGE) docker-compose -f $(COMPOSE_FILE)
+%.mocha: COMPOSE = DIR=$(WORKDIR) IMAGE=$(IMAGE) docker-compose -f $(COMPOSE_FILE)
 %.production.mocha:
 	docker pull $(IMAGE)
 	$(COMPOSE) run --rm tester npm test
