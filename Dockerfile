@@ -20,15 +20,14 @@ RUN apk add --update git curl make gcc g++ binutils-gold python linux-headers pa
     /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp \
     /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
 
-WORKDIR /src
-
+ONBUILD ARG WORKDIR=/src
+ONBUILD WORKDIR $WORKDIR
 ONBUILD COPY ./package.json /src/package.json
 ONBUILD ARG NODE_ENV=production
 ONBUILD ARG NPM_PROXY=https://registry.npmjs.com
 ONBUILD RUN npm install --registry=$NPM_PROXY
 ONBUILD RUN apk del git curl make gcc g++ python && \
   rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp src
-
 ONBUILD COPY . /src
 
 CMD [ "npm", "start" ]
