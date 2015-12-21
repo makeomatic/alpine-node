@@ -35,6 +35,7 @@ Example `.dockerignore` is given in the `node-makefile` dir
 
 ### Use-case for node-makefile example
 
+0. Install `gettext` package on OS X, `brew install gettext`, `brew link --force gettext`. It will give you `envsubst` package
 1. Copy `Makefile`, `.dockerignore` and `Dockerfile` from `node-makefile` to your project
 2. Extend `Dockerfile` with your project-specific settings, for instance, if you run an http server - expose it's ports, final Dockerfile example:
 
