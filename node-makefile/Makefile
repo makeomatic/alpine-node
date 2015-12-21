@@ -18,8 +18,7 @@ test: mocha
 %.mocha: IMAGE=$(DOCKER_USER)/alpine-node:$(NODE_VERSION)
 %.mocha: COMPOSE = DIR=$(WORKDIR) IMAGE=$(IMAGE) docker-compose -f $(COMPOSE_FILE)
 %.production.mocha:
-	docker pull $(IMAGE)
-	$(COMPOSE) run --rm tester npm test
+	$(COMPOSE) run -e SKIP_REBUILD=${SKIP_REBUILD} --rm tester npm test
 %.mocha: ;
 
 %.build: ARGS = --build-arg NODE_ENV=$(NODE_ENV) --build-arg NPM_PROXY=$(NPM_PROXY)
