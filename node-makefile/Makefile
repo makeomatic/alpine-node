@@ -5,13 +5,15 @@ PKG_VERSION := $(shell cat package.json | ./node_modules/.bin/json version)
 NPM_PROXY := http://$(shell docker-machine ip dev):4873
 DOCKER_USER := makeomatic
 DIST := $(DOCKER_USER)/$(PKG_NAME)
-NODE_VERSIONS := 5.3.0
+NODE_VERSIONS := 5.3.0 4.2.3
 ENVS := development production
 TASK_LIST := $(foreach env,$(ENVS),$(addsuffix .$(env), $(NODE_VERSIONS)))
 WORKDIR := /src
 COMPOSE_FILE := test/docker-compose.yml
 
 test: mocha cleanup
+
+build: docker tag
 
 %.production.mocha:
 	@echo "testing $@"
@@ -26,17 +28,19 @@ test: mocha cleanup
 
 %.cleanup: ;
 
-%.production.build:
-	@echo "tagging build $@"
-	docker tag -f $(PKG_PREFIX_ENV) $(PKG_PREFIX)
-	docker tag -f $(PKG_PREFIX_ENV) $(PKG_PREFIX)-$(PKG_VERSION)
-
-%.build: ARGS = --build-arg NODE_ENV=$(NODE_ENV) --build-arg NPM_PROXY=$(NPM_PROXY)
-%.build:
+%.docker: ARGS = --build-arg NODE_ENV=$(NODE_ENV) --build-arg NPM_PROXY=$(NPM_PROXY)
+%.docker:
 	@echo "building $@"
 	NODE_VERSION=$(NODE_VERSION) envsubst < "./Dockerfile" > $(DOCKERFILE)
 	docker build $(ARGS) -t $(PKG_PREFIX_ENV) -f $(DOCKERFILE) .
 	rm $(DOCKERFILE)
+
+%.production.tag:
+	@echo "tagging build $@"
+	docker tag -f $(PKG_PREFIX_ENV) $(PKG_PREFIX)
+	docker tag -f $(PKG_PREFIX_ENV) $(PKG_PREFIX)-$(PKG_VERSION)
+
+%.tag: ;
 
 %.development.pull:
 	@echo "pulling development $@"
@@ -69,4 +73,4 @@ all: test build push
 	@echo $@  # print target name
 	@$(MAKE) -f $(THIS_FILE) $(addsuffix .$@, $(TASK_LIST))
 
-.PHONY: all test %.mocha %.build %.push %.pull
+.PHONY: all test build %.mocha %.docker %.push %.pull
