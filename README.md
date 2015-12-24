@@ -58,7 +58,7 @@ EXPOSE 8080
 #   `makeomatic/<nodejs-pkg-name>:5.2.0`
 #   `makeomatic/<nodejs-pkg-name>:5.3.0-<nodejs-pkg-version>`
 #   `makeomatic/<nodejs-pkg-name>:5.2.0-<nodejs-pkg-version>`
-make NODE_VERSIONS="5.3.0 5.2.0" NPM_PROXY=https://registry.npmjs.com ENVS=".production" build
+make NODE_VERSIONS="5.3.0 5.2.0" NPM_PROXY=https://registry.npmjs.com ENVS="production" build
 
 # option 2 - with defaults
 # Output will include:
