@@ -1,5 +1,5 @@
 shell := /bin/bash
-NODE_VERSIONS := 5.3.0 4.2.3
+NODE_VERSIONS := 5.4.0 5.3.0 4.2.3
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 REPO := makeomatic
 IMAGE := alpine-node
@@ -13,6 +13,7 @@ DIST := $(REPO)/$(IMAGE)
 
 %.push:
 	docker push $(IMAGE_NAME)
+	docker push $(IMAGE_NAME)-ssh
 
 %.push-ssh:
 	docker push $(IMAGE_NAME)-ssh
