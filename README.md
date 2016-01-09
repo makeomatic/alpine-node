@@ -7,9 +7,25 @@ Check example of Makefile for node-based app in the appropriate folder. Requires
 
 ## Available tags
 
-1. `makeomatic/alpine-node:5.3.0`
-2. `makeomatic/alpine-node:5.2.0`
-3. `makeomatic/alpine-node:5.1.1`
+makeomatic/alpine-node:5.4.0
+makeomatic/alpine-node:5.3.0
+makeomatic/alpine-node:4.2.3
+
+makeomatic/alpine-node:5.4.0-phantom
+makeomatic/alpine-node:5.3.0-phantom
+makeomatic/alpine-node:4.2.3-phantom
+
+makeomatic/alpine-node:5.4.0-onbuild
+makeomatic/alpine-node:5.3.0-onbuild
+makeomatic/alpine-node:4.2.3-onbuild
+
+makeomatic/alpine-node:5.4.0-ssh
+makeomatic/alpine-node:5.3.0-ssh
+makeomatic/alpine-node:4.2.3-ssh
+
+makeomatic/alpine-node:5.4.0-ssh-onbuild
+makeomatic/alpine-node:5.3.0-ssh-onbuild
+makeomatic/alpine-node:4.2.3-ssh-onbuild
 
 ## Dockerizing node apps
 
