@@ -11,14 +11,14 @@ PHANTOMJS_VERSION := 1.9.8
 
 %.build-ssh:
 	$(DOCKER) -t $(IMAGE_NAME)-ssh - < ./alpine-node/Dockerfile.ssh
-	NODE_VER=$(NODE_VER) envsubst < ./alpine-node-onbuild/Dockerfile.ssh | docker build -t $(IMAGE_NAME)-ssh-onbuild -
+	NODE_VER=$(NODE_VER) envsubst '$$NODE_VER' < ./alpine-node-onbuild/Dockerfile.ssh | docker build -t $(IMAGE_NAME)-ssh-onbuild -
 
 %.build:
 	$(DOCKER) -t $(IMAGE_NAME) - < ./alpine-node/Dockerfile
-	NODE_VER=$(NODE_VER) envsubst < ./alpine-node-onbuild/Dockerfile | docker build -t $(IMAGE_NAME)-onbuild -
+	NODE_VER=$(NODE_VER) envsubst '$$NODE_VER' < ./alpine-node-onbuild/Dockerfile | docker build -t $(IMAGE_NAME)-onbuild -
 
 push:
-	docker push $(IMAGE)
+	docker push $(DIST)
 
 %.push-phantom:
 	docker push $(IMAGE_NAME)-phantom
