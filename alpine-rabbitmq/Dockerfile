@@ -36,6 +36,7 @@ ENV ERL_EPMD_PORT=4369 \
 
 COPY erlang.cookie /var/lib/rabbitmq/.erlang.cookie
 COPY rabbitmq.config /usr/lib/rabbitmq/etc/rabbitmq/
+COPY root/ /
 
 # Fetch the external plugins and setup RabbitMQ
 RUN \
@@ -62,6 +63,3 @@ RUN \
   chown -R rabbitmq /usr/lib/rabbitmq /var/lib/rabbitmq
 
 EXPOSE 4369 5671 5672 15672 25672
-
-USER rabbitmq
-CMD /usr/lib/rabbitmq/bin/rabbitmq-server

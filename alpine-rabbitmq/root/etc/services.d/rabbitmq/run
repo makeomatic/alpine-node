@@ -1,0 +1,5 @@
+#!/usr/bin/execlineb -P
+if { s6-svwait -t 5000 -u /var/run/s6/services/resolver }
+with-contenv
+s6-setuidgid rabbitmq
+rabbitmq-server
