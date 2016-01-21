@@ -8,7 +8,7 @@ ENV RABBITMQ_VERSION=3.5.7 \
     AUTOCLUSTER_VERSION=0.4.1
 
 RUN \
-  apk-install bash coreutils curl erlang erlang-asn1 erlang-crypto erlang-hipe erlang-eldap erlang-erts erlang-inets erlang-mnesia erlang-os-mon erlang-public-key erlang-sasl erlang-ssl erlang-xmerl && \
+  apk --no-cache add coreutils curl erlang-hipe erlang erlang-asn1 erlang-crypto erlang-eldap erlang-erts erlang-inets erlang-mnesia erlang-os-mon erlang-public-key erlang-sasl erlang-ssl erlang-xmerl && \
   curl -sL -o /tmp/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.gz https://www.rabbitmq.com/releases/rabbitmq-server/v${RABBITMQ_VERSION}/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.gz && \
   mkdir -p /usr/lib/rabbitmq/lib /usr/lib/rabbitmq/etc && \
   cd /usr/lib/rabbitmq/lib && \
@@ -19,7 +19,7 @@ RUN \
   curl -sL -o /usr/lib/rabbitmq/plugins/rabbitmq_delayed_message_exchange-${DELAYED_MESSAGE_VERSION}.ez  http://www.rabbitmq.com/community-plugins/${PLUGIN_BASE}/rabbitmq_delayed_message_exchange-${DELAYED_MESSAGE_VERSION}.ez && \
   curl -sL -o /usr/lib/rabbitmq/plugins/rabbitmq_top-${TOP_VERSION}.ez http://www.rabbitmq.com/community-plugins/${PLUGIN_BASE}/rabbitmq_top-${TOP_VERSION}.ez && \
   curl -sL -o /usr/lib/rabbitmq/plugins/autocluster-${AUTOCLUSTER_VERSION}.ez https://github.com/aweber/rabbitmq-autocluster/releases/download/${AUTOCLUSTER_VERSION}/autocluster-${AUTOCLUSTER_VERSION}.ez && \
-  adduser -s /bin/bash -D -h /var/lib/rabbitmq rabbitmq
+  adduser -s /bin/sh -D -h /var/lib/rabbitmq rabbitmq
 
 # Environment variables required to run
 ENV ERL_EPMD_PORT=4369 \
@@ -40,6 +40,7 @@ COPY root/ /
 
 # Fetch the external plugins and setup RabbitMQ
 RUN \
+  apk del coreutils curl && \
   ln -sf /var/lib/rabbitmq/.erlang.cookie /root/ && \
   chown rabbitmq /var/lib/rabbitmq/.erlang.cookie && \
   chmod 0600 /var/lib/rabbitmq/.erlang.cookie /root/.erlang.cookie && \
