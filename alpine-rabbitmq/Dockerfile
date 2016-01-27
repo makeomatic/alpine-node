@@ -8,7 +8,7 @@ ENV RABBITMQ_VERSION=3.5.7 \
     AUTOCLUSTER_VERSION=0.4.1
 
 RUN \
-  apk --no-cache add coreutils curl erlang-hipe erlang erlang-asn1 erlang-crypto erlang-eldap erlang-erts erlang-inets erlang-mnesia erlang-os-mon erlang-public-key erlang-sasl erlang-ssl erlang-xmerl && \
+  apk --no-cache add coreutils curl erlang erlang-asn1 erlang-crypto erlang-eldap erlang-erts erlang-inets erlang-mnesia erlang-os-mon erlang-public-key erlang-sasl erlang-ssl erlang-xmerl erlang-hipe && \
   curl -sL -o /tmp/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.gz https://www.rabbitmq.com/releases/rabbitmq-server/v${RABBITMQ_VERSION}/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.gz && \
   mkdir -p /usr/lib/rabbitmq/lib /usr/lib/rabbitmq/etc && \
   cd /usr/lib/rabbitmq/lib && \
@@ -34,13 +34,11 @@ ENV ERL_EPMD_PORT=4369 \
     RABBITMQ_MNESIA_DIR=/var/lib/rabbitmq/mnesia \
     RABBITMQ_PID_FILE=/var/lib/rabbitmq/rabbitmq.pid
 
-COPY erlang.cookie /var/lib/rabbitmq/.erlang.cookie
-COPY rabbitmq.config /usr/lib/rabbitmq/etc/rabbitmq/
 COPY root/ /
 
 # Fetch the external plugins and setup RabbitMQ
 RUN \
-  apk del coreutils curl && \
+  apk del curl && \
   ln -sf /var/lib/rabbitmq/.erlang.cookie /root/ && \
   chown rabbitmq /var/lib/rabbitmq/.erlang.cookie && \
   chmod 0600 /var/lib/rabbitmq/.erlang.cookie /root/.erlang.cookie && \
@@ -61,5 +59,7 @@ RUN \
         rabbitmq_web_stomp \
         autocluster && \
   chown -R rabbitmq /usr/lib/rabbitmq /var/lib/rabbitmq
+
+VOLUME ["/var/lib/rabbitmq","/usr/lib/rabbitmq/etc/rabbitmq"]
 
 EXPOSE 4369 5671 5672 15672 25672

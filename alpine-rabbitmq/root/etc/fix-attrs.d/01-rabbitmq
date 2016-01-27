@@ -1,0 +1,2 @@
+/var/lib/rabbitmq true rabbitmq 0750 0750
+/usr/lib/rabbitmq true rabbitmq 0750 0750
