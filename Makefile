@@ -13,6 +13,10 @@ PHANTOMJS_VERSION := 1.9.8
 	$(DOCKER) -t $(IMAGE_NAME)-vips - < ./alpine-node/Dockerfile.vips
 	NODE_VER=$(NODE_VER) envsubst '$$NODE_VER' < ./alpine-node-onbuild/Dockerfile.vips | docker build -t $(IMAGE_NAME)-vips-onbuild -
 
+%.build-vips-ssh:
+	NODE_VER=$(NODE_VER) envsubst '$$NODE_VER' < ./alpine-node/Dockerfile.vips-ssh | docker build -t $(IMAGE_NAME)-vips-ssh -
+	NODE_VER=$(NODE_VER) envsubst '$$NODE_VER' < ./alpine-node-onbuild/Dockerfile.vips-ssh | docker build -t $(IMAGE_NAME)-vips-ssh-onbuild -
+
 %.build-ssh:
 	$(DOCKER) -t $(IMAGE_NAME)-ssh - < ./alpine-node/Dockerfile.ssh
 	NODE_VER=$(NODE_VER) envsubst '$$NODE_VER' < ./alpine-node-onbuild/Dockerfile.ssh | docker build -t $(IMAGE_NAME)-ssh-onbuild -
@@ -32,7 +36,7 @@ push:
 	docker pull $(IMAGE_NAME)-vips
 	docker pull $(IMAGE_NAME)-vips-onbuild
 
-all: build build-ssh build-vips push
+all: build build-ssh build-vips build-vips-ssh push
 
 %: NODE_VER = $(basename $@)
 %: BUILD_ARG = --build-arg VERSION=v$(NODE_VER)
@@ -42,4 +46,4 @@ all: build build-ssh build-vips push
 	@echo $@  # print target name
 	@$(MAKE) -f $(THIS_FILE) $(addsuffix .$@, $(NODE_VERSIONS))
 
-.PHONY: all %.build %.build-ssh %.build-vips %.pull push
+.PHONY: all %.build %.build-ssh %.build-vips %.build-vips-ssh %.pull push

@@ -1,4 +1,4 @@
-FROM makeomatic/alpine-node:$NODE_VER-ssh
+FROM makeomatic/alpine-node:$NODE_VER-vips-ssh
 
 ONBUILD ARG WORKDIR=/src
 ONBUILD WORKDIR $WORKDIR

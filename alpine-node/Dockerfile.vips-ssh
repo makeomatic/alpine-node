@@ -1,0 +1,4 @@
+FROM makeomatic/alpine-node:$NODE_VER-vips
+
+RUN apk --update add openssh && \
+  rm -rf /usr/share/man /tmp/* /var/cache/apk/*
