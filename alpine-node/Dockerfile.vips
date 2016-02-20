@@ -1,9 +1,10 @@
-FROM gliderlabs/alpine:3.3
+FROM gliderlabs/alpine:edge
 
 ARG VERSION=v5.5.0
 ARG NPM_VERSION=3
 
-RUN apk add --no-cache git curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ openssh && \
+RUN apk --no-cache upgrade && \
+  apk add --no-cache git curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ && \
   curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
   cd /node-${VERSION} && \
   ./configure --prefix=/usr ${CONFIG_FLAGS} && \
@@ -17,8 +18,11 @@ RUN apk add --no-cache git curl make gcc g++ binutils-gold python linux-headers 
   fi && \
   apk del linux-headers paxctl && \
   rm -rf /etc/ssl /node-${VERSION} \
-    /usr/share/man /tmp/* /root/.npm /root/.node-gyp \
+    /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp \
     /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html && \
   npm set progress=false
+
+# Install libvips with build headers and dependencies
+RUN apk add libvips-dev --update --repository https://s3.amazonaws.com/wjordan-apk --allow-untrusted
 
 CMD [ "npm", "start" ]

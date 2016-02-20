@@ -18,8 +18,7 @@ RUN apk add --no-cache git curl make gcc g++ binutils-gold python linux-headers 
   apk del linux-headers paxctl && \
   rm -rf /etc/ssl /node-${VERSION} \
     /usr/share/man /tmp/* /root/.npm /root/.node-gyp \
-    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
-
-RUN npm set progress=false
+    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html && \
+  npm set progress=false
 
 CMD [ "npm", "start" ]

@@ -1,1 +1,0 @@
-Installs phantomjs binary
