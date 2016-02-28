@@ -1,13 +1,9 @@
 SHELL := /bin/bash
-NODE_VERSIONS := 5.6.0 4.3.1
+NODE_VERSIONS := 5.7.0 4.3.1
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 REPO := makeomatic
 IMAGE := alpine-node
 DIST := $(REPO)/$(IMAGE)
-PHANTOMJS_VERSION := 1.9.8
-
-%.build-phantom:
-	PHANTOMJS_VERSION=$(PHANTOMJS_VERSION) NODE_VER=$(NODE_VER) envsubst < ./alpine-phantom/Dockerfile | docker build -t $(IMAGE_NAME)-phantom -
 
 %.build-vips:
 	$(DOCKER) -t $(IMAGE_NAME)-vips - < ./alpine-node/Dockerfile.vips
