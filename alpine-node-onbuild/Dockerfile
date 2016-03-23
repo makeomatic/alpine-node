@@ -8,4 +8,4 @@ ONBUILD ARG NPM_PROXY=https://registry.npmjs.com
 ONBUILD RUN npm install --registry=$NPM_PROXY
 ONBUILD COPY . /src
 ONBUILD RUN apk del git curl make gcc g++ python && \
-  rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp src
+  rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp src /etc/ssl
