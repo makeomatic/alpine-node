@@ -1,6 +1,5 @@
 FROM makeomatic/alpine-node:$NODE_VER-vips
 
-ONBUILD
 ONBUILD ARG WORKDIR=/src
 ONBUILD WORKDIR $WORKDIR
 ONBUILD COPY ./package.json /src/package.json
