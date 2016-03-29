@@ -1,4 +1,4 @@
-giSHELL := /bin/bash
+SHELL := /bin/bash
 NODE_VERSIONS := 5.9.0 4.4.0
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 REPO := makeomatic
