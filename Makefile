@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-NODE_VERSIONS := 5.9.0 4.4.0
+NODE_VERSIONS := 5.9.1 4.4.1
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 REPO := makeomatic
 IMAGE := alpine-node
