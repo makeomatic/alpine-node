@@ -2,6 +2,7 @@ FROM gliderlabs/alpine:3.4
 
 ENV NODE_VERSION=v6.2.1 \
     NPM_VERSION=3 \
+    NODE_HOME=/usr/local \
     RUBY_MAJOR=2.3 \
     RUBY_VERSION=2.3.1 \
     RUBY_DOWNLOAD_SHA256=b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd \
@@ -74,14 +75,14 @@ RUN \
   && cd / \
   && curl -sSL https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.gz | tar -xz \
   && cd /node-${NODE_VERSION} \
-  && ./configure --prefix=/usr ${CONFIG_FLAGS} \
+  && ./configure --prefix=${NODE_HOME} ${CONFIG_FLAGS} \
   && make -j"$(getconf _NPROCESSORS_ONLN)" \
   && make install \
-  && paxctl -cm /usr/bin/node \
+  && paxctl -cm ${NODE_HOME}/bin/node \
   && cd / \
-  && if [ -x /usr/bin/npm ]; then \
+  && if [ -x ${NODE_HOME}/bin/npm ]; then \
     npm install -g npm@${NPM_VERSION} && \
-    find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
+    find ${NODE_HOME}/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
   fi \
   && runDeps="$( \
     scanelf --needed --nobanner --recursive /usr/local \
@@ -91,14 +92,12 @@ RUN \
       | sort -u \
   )" \
   && apk add --virtual .rundeps $runDeps \
-    libstdc++ \
-    libgcc \
   && apk del .builddeps \
   && gem update --system $RUBYGEMS_VERSION \
   && rm -rf /node-${NODE_VERSION} \
     /usr/src/ruby \
     /usr/share/man /tmp/* /root/.npm /root/.node-gyp \
-    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html \
+    ${NODE_HOME}/lib/node_modules/npm/man ${NODE_HOME}/lib/node_modules/npm/doc ${NODE_HOME}/lib/node_modules/npm/html \
   && gem install bundler --version "$BUNDLER_VERSION" \
   && mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
   && chmod 777 "$GEM_HOME" "$BUNDLE_BIN" \
