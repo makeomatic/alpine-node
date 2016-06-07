@@ -1,0 +1,23 @@
+FROM makeomatic/node:6.2.1-vips-ssh
+
+ONBUILD WORKDIR /src
+
+ONBUILD COPY package.json .
+ONBUILD COPY ./keys/* /tmp/.ssh/
+ONBUILD RUN \
+  GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production \
+  && npm dedupe \
+  && apk del .buildDeps \
+    openssh \
+    git \
+    g++ \
+    make \
+  && chown node:node /src
+  && rm -rf \
+    /root/.npm \
+    /root/.node-gyp \
+    /tmp/* \
+
+ONBUILD USER node
+ONBUILD COPY . /src
+ONBUILD RUN rm -rf /src/keys

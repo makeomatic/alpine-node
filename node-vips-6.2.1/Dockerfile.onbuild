@@ -1,0 +1,17 @@
+FROM makeomatic/node:6.2.1-vips
+
+ONBUILD WORKDIR /src
+
+ONBUILD COPY package.json .
+ONBUILD RUN \
+  npm install --production \
+  && npm dedupe \
+  && apk del g++ make \
+  && chown node:node /src \
+  && rm -rf \
+    /tmp/* \
+    /root/.node-gyp \
+    /root/.npm
+
+ONBUILD USER node
+ONBUILD COPY . /src

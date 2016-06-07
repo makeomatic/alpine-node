@@ -1,0 +1,14 @@
+FROM makeomatic/node:6.2.1
+
+ONBUILD WORKDIR /src
+ONBUILD USER node
+ONBUILD COPY package.json .
+ONBUILD RUN \
+  npm install --production \
+  && npm dedupe \
+  && rm -rf \
+    ~/node/.npm \
+    ~/node/.node-gyp \
+    /tmp/*
+
+ONBUILD COPY . /src

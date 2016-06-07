@@ -9,11 +9,11 @@ ENV NODE_VERSION=v6.2.1 \
     RUBYGEMS_VERSION=2.6.4 \
     BUNDLER_VERSION=1.12.4 \
     GEM_HOME=/usr/local/bundle \
-	  BUNDLE_SILENCE_ROOT_WARNING=1
+    BUNDLE_SILENCE_ROOT_WARNING=1
 
 ENV BUNDLE_PATH="$GEM_HOME" \
-	  BUNDLE_BIN="$GEM_HOME/bin" \
-	  BUNDLE_APP_CONFIG="$GEM_HOME"
+    BUNDLE_BIN="$GEM_HOME/bin" \
+    BUNDLE_APP_CONFIG="$GEM_HOME"
 
 ENV PATH $BUNDLE_BIN:$PATH
 
@@ -25,27 +25,27 @@ RUN \
   } >> /usr/local/etc/gemrc \
   && set -ex \
   && apk add --no-cache --update --virtual .builddeps \
-		bison \
-		bzip2 \
-		bzip2-dev \
-		ca-certificates \
-		coreutils \
-		gdbm-dev \
-		glib-dev \
-		libc-dev \
-		libffi-dev \
-		libxml2-dev \
-		libxslt-dev \
-		linux-headers \
-		make \
-		ncurses-dev \
-		openssl-dev \
-		procps \
+    bison \
+    bzip2 \
+    bzip2-dev \
+    ca-certificates \
+    coreutils \
+    gdbm-dev \
+    glib-dev \
+    libc-dev \
+    libffi-dev \
+    libxml2-dev \
+    libxslt-dev \
+    linux-headers \
+    make \
+    ncurses-dev \
+    openssl-dev \
+    procps \
     # https://bugs.ruby-lang.org/issues/11869 and https://github.com/docker-library/ruby/issues/75
-		readline-dev \
-		ruby \
-		yaml-dev \
-		zlib-dev \
+    readline-dev \
+    ruby \
+    yaml-dev \
+    zlib-dev \
     autoconf \
     binutils-gold \
     curl \
@@ -62,16 +62,16 @@ RUN \
   && echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.gz" | sha256sum -c - \
   && mkdir -p /usr/src \
   && tar -xzf ruby.tar.gz -C /usr/src \
-	&& mv "/usr/src/ruby-$RUBY_VERSION" /usr/src/ruby \
-	&& rm ruby.tar.gz \
-	&& cd /usr/src/ruby \
-	&& { echo '#define ENABLE_PATH_CHECK 0'; echo; cat file.c; } > file.c.new && mv file.c.new file.c \
-	&& autoconf \
-	# the configure script does not detect isnan/isinf as macros
-	&& ac_cv_func_isnan=yes ac_cv_func_isinf=yes \
-		./configure --disable-install-doc \
-	&& make -j"$(getconf _NPROCESSORS_ONLN)" \
-	&& make install \
+  && mv "/usr/src/ruby-$RUBY_VERSION" /usr/src/ruby \
+  && rm ruby.tar.gz \
+  && cd /usr/src/ruby \
+  && { echo '#define ENABLE_PATH_CHECK 0'; echo; cat file.c; } > file.c.new && mv file.c.new file.c \
+  && autoconf \
+  # the configure script does not detect isnan/isinf as macros
+  && ac_cv_func_isnan=yes ac_cv_func_isinf=yes \
+    ./configure --disable-install-doc \
+  && make -j"$(getconf _NPROCESSORS_ONLN)" \
+  && make install \
   && cd / \
   && curl -sSL https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.gz | tar -xz \
   && cd /node-${NODE_VERSION} \

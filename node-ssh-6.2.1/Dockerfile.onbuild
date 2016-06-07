@@ -1,0 +1,23 @@
+FROM makeomatic/node:6.2.1-ssh
+
+# copy stuff in
+ONBUILD WORKDIR /src
+
+# install packages
+ONBUILD COPY package.json .
+ONBUILD COPY ./keys/* /tmp/.ssh/
+ONBUILD RUN GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production && npm dedupe
+ONBUILD COPY . /src
+
+# remove ssh
+ONBUILD RUN \
+  apk del openssh git \
+  && rm -rf \
+    /src/keys \
+    /root/.npm \
+    /root/.node-gyp \
+    /tmp/* \
+  && chown node:node /src
+
+# go back to node user and copy source
+ONBUILD USER node
