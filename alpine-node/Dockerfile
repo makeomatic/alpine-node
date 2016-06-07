@@ -1,9 +1,9 @@
-FROM gliderlabs/alpine:3.3
+FROM gliderlabs/alpine:3.4
 
 ARG VERSION=v5.5.0
 ARG NPM_VERSION=3
 
-RUN apk add --no-cache git curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ && \
+RUN apk add --no-cache --update git curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ && \
   curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
   cd /node-${VERSION} && \
   ./configure --prefix=/usr ${CONFIG_FLAGS} && \
@@ -19,6 +19,7 @@ RUN apk add --no-cache git curl make gcc g++ binutils-gold python linux-headers 
   rm -rf /node-${VERSION} \
     /usr/share/man /tmp/* /root/.npm /root/.node-gyp \
     /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html && \
-  npm set progress=false
+  npm set progress=false && \
+  adduser -S node
 
 CMD [ "npm", "start" ]
