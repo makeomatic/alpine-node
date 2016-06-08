@@ -22,7 +22,7 @@ RUN \
   && ./configure --prefix=${NODE_HOME} ${CONFIG_FLAGS} \
   && make -j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
   && make install \
-  && paxctl -cm ${NODE_HOME}/bin/node
+  && paxctl -cm ${NODE_HOME}/bin/node \
   && cd / \
   && if [ -x ${NODE_HOME}/bin/npm ]; then \
     npm install -g npm@${NPM_VERSION} && \
