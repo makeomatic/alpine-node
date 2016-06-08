@@ -12,7 +12,7 @@ ONBUILD RUN \
     git \
     g++ \
     make \
-  && chown node:node /src
+  && chown node /src
   && rm -rf \
     /root/.npm \
     /root/.node-gyp \

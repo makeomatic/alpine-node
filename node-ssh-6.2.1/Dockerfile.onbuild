@@ -17,7 +17,7 @@ ONBUILD RUN \
     /root/.npm \
     /root/.node-gyp \
     /tmp/* \
-  && chown node:node /src
+  && chown node /src
 
 # go back to node user and copy source
 ONBUILD USER node

@@ -4,11 +4,9 @@ ENV NODE_VERSION=v6.2.1 \
     NPM_VERSION=3 \
     NODE_HOME=/usr/local
 
-# pub key for amazon repo
-COPY wjordan.rsa.pub /etc/apk/keys/
-
 RUN \
-  apk add --no-cache --update --virtual .node-buildDeps \
+  echo "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkLEXd3P3MFJqXXEUVvbm\n5YyrHluoRtyIVPMCTqMmBNdIi43EaYKZke8xJrBnLRyDIo/ZIF3XCMOOHL5VHsg9\n7ztIsTCK5LQRwnwKBMKpUAZvImZ4YXza2esuASBTTvL98VaVDv1UCRI+53t22TIu\nx3HYp2RWXzW0VuWjYNn5gjZJslxIFCNebspYCtaEngN4T8cGCYj5xHdGV4Xazqdy\nSRpVES99hcI6EohBU9VD3kkbD9tT+psCogJNwYDcBYngyp8oYbPhcXV1Cqwt2z96\n4RFSt4D2eIjx9sy7F+Xji7sdR7GhcRvjbwkf5Pf0gjWSdnrqlE6znCJdbk0sx1bx\nOQIDAQAB\n-----END PUBLIC KEY-----\n" > /etc/apk/keys/wjordan.rsa.pub \
+  && apk add --no-cache --update --virtual .node-buildDeps \
     git \
     curl \
     make \

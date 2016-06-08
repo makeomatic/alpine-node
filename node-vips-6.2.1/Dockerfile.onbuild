@@ -7,7 +7,7 @@ ONBUILD RUN \
   npm install --production \
   && npm dedupe \
   && apk del g++ make \
-  && chown node:node /src \
+  && chown node /src \
   && rm -rf \
     /tmp/* \
     /root/.node-gyp \
