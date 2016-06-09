@@ -1,14 +1,19 @@
 FROM makeomatic/node:6.2.1
 
 ONBUILD WORKDIR /src
-ONBUILD USER node
 ONBUILD COPY package.json .
 ONBUILD RUN \
-  npm install --production \
+  # be able to handle git pulls from https
+  apk --update --no-cache add git \
+  && npm install --production \
   && npm dedupe \
+  # cleanup git
+  && apk del git \
   && rm -rf \
-    ~/node/.npm \
-    ~/node/.node-gyp \
+    /root/.npm \
+    /root/.node-gyp \
     /tmp/*
 
 ONBUILD COPY . /src
+ONBUILD RUN chown -R node /src
+ONBUILD USER node

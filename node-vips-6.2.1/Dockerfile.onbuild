@@ -11,11 +11,11 @@ ONBUILD RUN \
     g++ \
     make \
     libvips-dev \
-  && chown node /src \
   && rm -rf \
     /tmp/* \
     /root/.node-gyp \
     /root/.npm
 
-ONBUILD USER node
 ONBUILD COPY . /src
+ONBUILD RUN  chown -R node /src
+ONBUILD USER node

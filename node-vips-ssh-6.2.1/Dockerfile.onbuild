@@ -14,12 +14,13 @@ ONBUILD RUN \
     git \
     g++ \
     make \
-  && chown node /src
   && rm -rf \
     /root/.npm \
     /root/.node-gyp \
     /tmp/* \
 
-ONBUILD USER node
 ONBUILD COPY . /src
-ONBUILD RUN rm -rf /src/keys
+ONBUILD RUN \
+  chown -R node /src \
+  && rm -rf /src/keys
+ONBUILD USER node

@@ -44,6 +44,6 @@ RUN \
     ${NODE_HOME}/share/man /tmp/* /root/.npm /root/.node-gyp \
     ${NODE_HOME}/lib/node_modules/npm/man ${NODE_HOME}/lib/node_modules/npm/doc ${NODE_HOME}/lib/node_modules/npm/html \
   && adduser -S node \
-  && apk add libvips --no-cache --update --repository https://cdn.matic.ninja/apk/community
+  && apk add libvips --no-cache --update --repository http://cdn.matic.ninja/apk/community
 
 CMD [ "npm", "start" ]

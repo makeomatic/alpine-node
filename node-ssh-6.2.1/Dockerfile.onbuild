@@ -11,13 +11,15 @@ ONBUILD COPY . /src
 
 # remove ssh
 ONBUILD RUN \
-  apk del openssh git \
+  apk del \
+    openssh \
+    git \
   && rm -rf \
     /src/keys \
     /root/.npm \
     /root/.node-gyp \
     /tmp/* \
-  && chown node /src
+  && chown -R node /src
 
 # go back to node user and copy source
 ONBUILD USER node
