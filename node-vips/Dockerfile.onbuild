@@ -5,7 +5,10 @@ ONBUILD WORKDIR /src
 ONBUILD COPY package.json .
 ONBUILD RUN \
   apk add libvips-dev --no-cache --update --repository http://cdn.matic.ninja/apk/community \
-  && apk add --no-cache --update git \
+  && apk add --no-cache --update \
+    git \
+    g++ \
+    make \
   && npm install --production \
   && npm dedupe \
   && apk del \

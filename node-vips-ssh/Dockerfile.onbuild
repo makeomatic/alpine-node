@@ -5,13 +5,12 @@ ONBUILD WORKDIR /src
 ONBUILD COPY package.json .
 ONBUILD COPY ./keys/* /tmp/.ssh/
 ONBUILD RUN \
-  apk add libvips-dev --no-cache --update --repository http://cdn.matic.ninja/apk/community \
+  apk add --no-cache g++ make git \
+  && apk add libvips-dev --no-cache --update --repository http://cdn.matic.ninja/apk/community \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production \
   && npm dedupe \
-  && apk del .buildDeps \
+  && apk del .buildDeps .flavorDeps \
     libvips-dev \
-    openssh \
-    git \
     g++ \
     make \
   && rm -rf \

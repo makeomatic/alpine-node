@@ -11,9 +11,7 @@ ONBUILD COPY . /src
 
 # remove ssh
 ONBUILD RUN \
-  apk del \
-    openssh \
-    git \
+  apk del .flavorDeps \
   && rm -rf \
     /src/keys \
     /root/.npm \

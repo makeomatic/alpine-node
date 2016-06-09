@@ -37,8 +37,6 @@ RUN \
       | sort -u \
   )" \
   && apk add --virtual .rundeps $runDeps \
-    g++ \
-    make \
   && apk del .node-buildDeps \
   && rm -rf /node-${NODE_VERSION} \
     ${NODE_HOME}/share/man /tmp/* /root/.npm /root/.node-gyp \
