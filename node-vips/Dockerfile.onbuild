@@ -4,13 +4,15 @@ ONBUILD WORKDIR /src
 
 ONBUILD COPY package.json .
 ONBUILD RUN \
-  apk add libvips-dev --no-cache --update --repository https://cdn.matic.ninja/apk/community \
+  apk add libvips-dev --no-cache --update --repository http://cdn.matic.ninja/apk/community \
+  && apk add --no-cache --update git \
   && npm install --production \
   && npm dedupe \
   && apk del \
     g++ \
     make \
     libvips-dev \
+    git \
   && rm -rf \
     /tmp/* \
     /root/.node-gyp \
