@@ -4,9 +4,13 @@ ONBUILD WORKDIR /src
 
 ONBUILD COPY package.json .
 ONBUILD RUN \
-  npm install --production \
+  apk add libvips-dev --no-cache --update --repository https://cdn.matic.ninja/apk/community \
+  && npm install --production \
   && npm dedupe \
-  && apk del g++ make \
+  && apk del \
+    g++ \
+    make \
+    libvips-dev \
   && chown node /src \
   && rm -rf \
     /tmp/* \
