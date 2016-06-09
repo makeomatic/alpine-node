@@ -5,7 +5,7 @@ ENV NODE_VERSION=v6.2.1 \
     NODE_HOME=/usr/local
 
 RUN \
-  echo "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkLEXd3P3MFJqXXEUVvbm\n5YyrHluoRtyIVPMCTqMmBNdIi43EaYKZke8xJrBnLRyDIo/ZIF3XCMOOHL5VHsg9\n7ztIsTCK5LQRwnwKBMKpUAZvImZ4YXza2esuASBTTvL98VaVDv1UCRI+53t22TIu\nx3HYp2RWXzW0VuWjYNn5gjZJslxIFCNebspYCtaEngN4T8cGCYj5xHdGV4Xazqdy\nSRpVES99hcI6EohBU9VD3kkbD9tT+psCogJNwYDcBYngyp8oYbPhcXV1Cqwt2z96\n4RFSt4D2eIjx9sy7F+Xji7sdR7GhcRvjbwkf5Pf0gjWSdnrqlE6znCJdbk0sx1bx\nOQIDAQAB\n-----END PUBLIC KEY-----\n" > /etc/apk/keys/will.jordan@gmail.com-56bf67f5.rsa.pub \
+  printf "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA29qkaf8HSeDwWO8MNipl\nPsiCdwETf9QK/k5ZoUyCF6xtBYg4BFcfAjdyzP5+uJmdIIfyWbrw8D7QCNVlSqTh\nzL4vm3X3ezLYdbm+QTr12aXLafJQI1FVvU+pRK3zsI0E2tjgLKdLBTLAe/aIzPbS\nLmsKPym/T3e2nNngyw+csvuLSQusgSrsiOt/6FZYFUMqTh2P6wfv+CHqyyqy3kK6\nQof/BWeX1aWisJYt/9nyXGJSyvi4KlxVrD6KIcw1mB4+UsN1VlK3YPBSHbA37y6D\nlhJd5rr47YqmQUyr+ooFQ0DGXVXJ/zDq8PiTq5dTvgwcMZAHt96W2gY0UFxt0waZ\nWwIDAQAB\n-----END PUBLIC KEY-----\n" > /etc/apk/keys/v@aminev.me-57586a31.rsa.pub \
   && apk add --no-cache --update --virtual .node-buildDeps \
     git \
     curl \
@@ -47,6 +47,6 @@ RUN \
     ${NODE_HOME}/share/man /tmp/* /root/.npm /root/.node-gyp \
     ${NODE_HOME}/lib/node_modules/npm/man ${NODE_HOME}/lib/node_modules/npm/doc ${NODE_HOME}/lib/node_modules/npm/html \
   && adduser -S node \
-  && apk add libvips-dev --no-cache --update --repository https://s3.amazonaws.com/wjordan-apk
+  && apk add libvips --no-cache --update --repository https://cdn.matic.ninja/apk/community
 
 CMD [ "npm", "start" ]
