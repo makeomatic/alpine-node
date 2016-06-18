@@ -1,6 +1,6 @@
 FROM gliderlabs/alpine:3.4
 
-ENV NODE_VERSION=v6.2.1 \
+ENV NODE_VERSION=v6.2.2 \
     NPM_VERSION=3 \
     NODE_HOME=/usr/local \
     RUBY_MAJOR=2.3 \
