@@ -1,7 +1,7 @@
 FROM gliderlabs/alpine:3.4
 
 ENV NODE_VERSION=v6.2.2 \
-    NPM_VERSION=3 \
+    NPM_VERSION=3.9.6 \
     NODE_HOME=/usr/local
 
 RUN \
