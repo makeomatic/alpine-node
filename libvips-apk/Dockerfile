@@ -1,4 +1,4 @@
-FROM gliderlabs/alpine:3.4
+FROM alpine:3.4
 
 ARG HTTP_PROXY
 ENV USERNAME alpine-sdk

@@ -1,4 +1,4 @@
-FROM makeomatic/node:6.2.2
+FROM makeomatic/node:6.5.0
 
 ONBUILD WORKDIR /src
 ONBUILD COPY package.json .
