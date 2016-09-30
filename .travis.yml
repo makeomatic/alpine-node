@@ -15,9 +15,7 @@ install:
 before_script:
   - |
     export PATH=$PATH:~/ci-scripts
-    [ ${TRAVIS_BRANCH} == master ] && \
-      export variant="latest" || \
-      export variant=${TRAVIS_BRANCH}
+    [ ${TRAVIS_BRANCH} == master ] || export variant=${TRAVIS_BRANCH}
 script:
   - |
     # build base node images that are used further in the project
