@@ -1,0 +1,52 @@
+language: bash
+services: docker
+
+env:
+  global:
+    - PROJECT=node
+    - NAMESPACE=makeomatic
+    - PUSH_NAMESPACES=makeomatic
+    - BASE_NAME=makeomatic/node
+
+install:
+  - curl -sSL https://github.com/makeomatic/ci-scripts/raw/master/install.sh | sh -s
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+before_script:
+  - |
+    export PATH=$PATH:~/ci-scripts
+    [ ${TRAVIS_BRANCH} == master ] && \
+      export variant="latest" || \
+      export variant=${TRAVIS_BRANCH}
+script:
+  - |
+    # build base node images that are used further in the project
+    docker-build -v "${variant}" $BASE_NAME -f node/Dockerfile . || exit $?
+    docker-build -v "${variant}-onbuild" $BASE_NAME -f node/Dockerfile.onbuild . || exit $?
+    docker-build -v "${variant}-tester" $BASE_NAME -f node/Dockerfile.tester . || exit $?
+    docker-build -v "${variant}-tester-glibc" $BASE_NAME -f node/Dockerfile.tester-glibc . || exit $?
+    # build node images with ruby
+    docker-build -v "${variant}-ruby" $BASE_NAME -f node-ruby/Dockerfile . || exit $?
+    # build node images with ssh embedded
+    docker-build -v "${variant}-ssh" $BASE_NAME -f node-ssh/Dockerfile . || exit $?
+    docker-build -v "${variant}-ssh-onbuild" $BASE_NAME -f node-ssh/Dockerfile.onbuild . || exit $?
+    # build node images with libvips
+    docker-build -v "${variant}-vips" $BASE_NAME -f node-vips/Dockerfile . || exit $?
+    docker-build -v "${variant}-vips-onbuild" $BASE_NAME -f node-vips/Dockerfile.onbuild . || exit $?
+    docker-build -v "${variant}-vips-tester-glibc" $BASE_NAME -f node-vips/Dockerfile.tester-glibc . || exit $?
+    # build node images with libvips & ssh
+    docker-build -v "${variant}-vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile . || exit $?
+    docker-build -v "${variant}-vips-ssh-onbuild" $BASE_NAME -f node-vips-ssh/Dockerfile.onbuild . || exit $?
+
+after_success:
+  - |
+    # Check if not PR and namespace (org or user) is in the push list PUSH_NAMESPACES.
+    [ "${TRAVIS_PULL_REQUEST}" = "false" ] && ( echo "${PUSH_NAMESPACES}" | grep -qw "${TRAVIS_REPO_SLUG%/*}" )
+    [ $? -eq 0 ] || exit 0
+    # List of newly created images
+    export images=$(docker images | grep "^$BASE_NAME" | tr -s '[:space:]' | cut -f1,2 -d' ' | sed 's/ /:/')
+    # Push to docker when DEPLOY is true
+    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    for image in $images; do docker push $image; done
+after_script:
+  - docker images

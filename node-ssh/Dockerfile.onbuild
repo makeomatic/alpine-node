@@ -1,4 +1,4 @@
-FROM makeomatic/node:6.5.0-ssh
+FROM makeomatic/node:6.7.0-ssh
 
 # copy stuff in
 ONBUILD WORKDIR /src
