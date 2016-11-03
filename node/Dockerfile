@@ -1,9 +1,9 @@
-FROM alpine:3.4
+FROM alpine:edge
 
 LABEL vendor=makeomatic \
-      version_tags="[\"6\",\"6.7.0\"]"
+      version_tags="[\"6\",\"6.9.1\"]"
 
-ENV NODE_VERSION=v6.7.0 \
+ENV NODE_VERSION=v6.9.1 \
     NPM_VERSION=3 \
     NODE_HOME=/usr/local
 

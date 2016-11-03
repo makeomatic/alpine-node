@@ -1,26 +1,22 @@
-FROM makeomatic/node:6.7.0-vips
+FROM makeomatic/node:6.9.1-vips
 
 ONBUILD WORKDIR /src
 
 ONBUILD COPY package.json .
 ONBUILD RUN \
-  apk add libvips-dev --no-cache --update --repository http://cdn.matic.ninja/apk/community \
-  && apk add --no-cache --update \
+  apk add --no-cache --update --virtual .flavorDeps \
     git \
     g++ \
     make \
+    vips-dev \
   && npm install --production \
   && npm dedupe \
-  && apk del \
-    g++ \
-    make \
-    libvips-dev \
-    git \
+  && apk del .flavorDeps \
   && rm -rf \
     /tmp/* \
     /root/.node-gyp \
     /root/.npm
 
 ONBUILD COPY . /src
-ONBUILD RUN  chown -R node /src
+ONBUILD RUN chown -R node /src
 ONBUILD USER node
