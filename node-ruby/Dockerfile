@@ -1,9 +1,9 @@
 FROM alpine:3.4
 
 LABEL vendor=makeomatic \
-      version_tags="[\"6\",\"6.7.0\"]"
+      version_tags="[\"6\",\"6.9.1\"]"
 
-ENV NODE_VERSION=v6.7.0 \
+ENV NODE_VERSION=v6.9.1 \
     NPM_VERSION=3 \
     NODE_HOME=/usr/local \
     RUBY_MAJOR=2.3 \
@@ -27,7 +27,7 @@ RUN \
     echo 'update: --no-document'; \
   } >> /usr/local/etc/gemrc \
   && set -ex \
-  && apk add --no-cache --update --virtual .builddeps \
+  && apk add --no-cache --virtual .builddeps \
     bison \
     bzip2 \
     bzip2-dev \
@@ -75,6 +75,7 @@ RUN \
     ./configure --disable-install-doc \
   && make -j"$(getconf _NPROCESSORS_ONLN)" \
   && make install \
+  && gem update --system $RUBYGEMS_VERSION \
   && cd / \
   && curl -sSL https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.gz | tar -xz \
   && cd /node-${NODE_VERSION} \
@@ -96,7 +97,6 @@ RUN \
   )" \
   && apk add --virtual .rundeps $runDeps \
   && apk del .builddeps \
-  && gem update --system $RUBYGEMS_VERSION \
   && rm -rf /node-${NODE_VERSION} \
     /usr/src/ruby \
     /usr/share/man /tmp/* /root/.npm /root/.node-gyp \

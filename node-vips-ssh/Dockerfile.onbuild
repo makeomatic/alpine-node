@@ -1,18 +1,17 @@
-FROM makeomatic/node:6.7.0-vips-ssh
+FROM makeomatic/node:6.9.1-vips-ssh
 
 ONBUILD WORKDIR /src
 
 ONBUILD COPY package.json .
 ONBUILD COPY ./keys/* /tmp/.ssh/
 ONBUILD RUN \
-  apk add --no-cache g++ make git \
-  && apk add libvips-dev --no-cache --update --repository http://cdn.matic.ninja/apk/community \
+  apk add --no-cache --virtual .buildDeps \
+    g++ \
+    make \
+    vips-dev@testing \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production \
   && npm dedupe \
   && apk del .buildDeps .flavorDeps \
-    libvips-dev \
-    g++ \
-    make \
   && rm -rf \
     /root/.npm \
     /root/.node-gyp \
