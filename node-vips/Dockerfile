@@ -1,4 +1,6 @@
 FROM makeomatic/node:6.9.1
 
 # add libvips
-RUN apk add --no-cache --update vips
+RUN \
+  echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+  && apk add --no-cache vips@testing

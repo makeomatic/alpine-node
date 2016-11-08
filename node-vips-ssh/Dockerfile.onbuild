@@ -5,10 +5,10 @@ ONBUILD WORKDIR /src
 ONBUILD COPY package.json .
 ONBUILD COPY ./keys/* /tmp/.ssh/
 ONBUILD RUN \
-  apk add --no-cache --update --virtual .buildDeps \
+  apk add --no-cache --virtual .buildDeps \
     g++ \
     make \
-    vips-dev \
+    vips-dev@testing \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production \
   && npm dedupe \
   && apk del .buildDeps .flavorDeps \

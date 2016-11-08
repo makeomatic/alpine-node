@@ -27,7 +27,7 @@ RUN \
     echo 'update: --no-document'; \
   } >> /usr/local/etc/gemrc \
   && set -ex \
-  && apk add --no-cache --update --virtual .builddeps \
+  && apk add --no-cache --virtual .builddeps \
     bison \
     bzip2 \
     bzip2-dev \
@@ -75,6 +75,7 @@ RUN \
     ./configure --disable-install-doc \
   && make -j"$(getconf _NPROCESSORS_ONLN)" \
   && make install \
+  && gem update --system $RUBYGEMS_VERSION \
   && cd / \
   && curl -sSL https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.gz | tar -xz \
   && cd /node-${NODE_VERSION} \
@@ -96,7 +97,6 @@ RUN \
   )" \
   && apk add --virtual .rundeps $runDeps \
   && apk del .builddeps \
-  && gem update --system $RUBYGEMS_VERSION \
   && rm -rf /node-${NODE_VERSION} \
     /usr/src/ruby \
     /usr/share/man /tmp/* /root/.npm /root/.node-gyp \

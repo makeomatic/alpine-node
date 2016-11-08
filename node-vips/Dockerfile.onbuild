@@ -4,11 +4,11 @@ ONBUILD WORKDIR /src
 
 ONBUILD COPY package.json .
 ONBUILD RUN \
-  apk add --no-cache --update --virtual .flavorDeps \
+  apk add --no-cache --virtual .flavorDeps \
     git \
     g++ \
     make \
-    vips-dev \
+    vips-dev@testing \
   && npm install --production \
   && npm dedupe \
   && apk del .flavorDeps \

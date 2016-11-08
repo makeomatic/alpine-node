@@ -8,7 +8,7 @@ ENV NODE_VERSION=v6.9.1 \
     NODE_HOME=/usr/local
 
 RUN \
-  apk add --no-cache --update --virtual .node-buildDeps \
+  apk add --no-cache --virtual .node-buildDeps \
     git \
     curl \
     make \
