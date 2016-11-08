@@ -46,7 +46,7 @@ docker-build -v "vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile .
 docker-build -v "vips-ssh-onbuild" $BASE_NAME -f node-vips-ssh/Dockerfile.onbuild .
 
 # List of newly created images
-images=$(docker images $BASE_NAME | tr -s '[:space:]' | cut -f1,2 -d' ' | sed 's/ /:/')
+images=$(docker images "$BASE_NAME" --format "{{ .Repository }}:{{ .Tag }}")
 
 # we actually need to
 # Push to docker when DEPLOY is true
