@@ -1,4 +1,4 @@
-FROM makeomatic/node:7.2.0-vips
+FROM makeomatic/node:7.2.1-vips
 
 ENV GLIBC_VER 2.23-r3
 
