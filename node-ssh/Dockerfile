@@ -1,4 +1,4 @@
-FROM makeomatic/node:7.3.0
+FROM makeomatic/node:7.4.0
 
 # add extra packages
 RUN \

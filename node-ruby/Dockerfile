@@ -1,9 +1,9 @@
 FROM alpine:3.4
 
 LABEL vendor=makeomatic \
-      version_tags="[\"7\",\"7.3\",\"7.3.0\"]"
+      version_tags="[\"7\",\"7.4\",\"7.4.0\"]"
 
-ENV NODE_VERSION=v7.3.0 \
+ENV NODE_VERSION=v7.4.0 \
     NPM_VERSION=3 \
     NODE_HOME=/usr/local \
     RUBY_MAJOR=2.3 \
