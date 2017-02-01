@@ -4,7 +4,7 @@ LABEL vendor=makeomatic \
       version_tags="[\"7\",\"7.5\",\"7.5.0\"]"
 
 ENV NODE_VERSION=v7.5.0 \
-    NPM_VERSION=3 \
+    NPM_VERSION=4 \
     NODE_HOME=/usr/local \
     RUBY_MAJOR=2.3 \
     RUBY_VERSION=2.3.1 \

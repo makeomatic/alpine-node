@@ -4,7 +4,7 @@ LABEL vendor=makeomatic \
       version_tags="[\"7\",\"7.5\",\"7.5.0\"]"
 
 ENV NODE_VERSION=v7.5.0 \
-    NPM_VERSION=3 \
+    NPM_VERSION=4 \
     NODE_HOME=/usr/local
 
 RUN \
