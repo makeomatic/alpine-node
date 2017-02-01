@@ -1,7 +1,7 @@
 FROM alpine:edge
 
 LABEL vendor=makeomatic \
-      version_tags="[\"7\",\"7.9\",\"7.9.5\"]"
+      version_tags="[\"7\",\"7.5\",\"7.5.0\"]"
 
 ENV NODE_VERSION=v7.5.0 \
     NPM_VERSION=3 \
