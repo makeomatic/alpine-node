@@ -27,7 +27,6 @@ RUN \
     echo 'update: --no-document'; \
   } >> /usr/local/etc/gemrc \
   && set -ex \
-  && echo "@main http://dl-cdn.alpinelinux.org/alpine/v3.5/main" >> /etc/apk/repositories \
   && apk add --no-cache --virtual .builddeps \
     bison \
     bzip2 \
@@ -60,7 +59,7 @@ RUN \
     libstdc++ \
     linux-headers \
     make \
-    paxctl@main \
+    paxctl \
     python \
   && curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz" \
   && echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.gz" | sha256sum -c - \
