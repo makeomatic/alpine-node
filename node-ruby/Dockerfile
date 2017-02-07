@@ -27,7 +27,7 @@ RUN \
     echo 'update: --no-document'; \
   } >> /usr/local/etc/gemrc \
   && set -ex \
-  && echo "@main http://dl-cdn.alpinelinux.org/alpine/3.5/main" >> /etc/apk/repositories \
+  && echo "@main http://dl-cdn.alpinelinux.org/alpine/v3.5/main" >> /etc/apk/repositories \
   && apk add --no-cache --virtual .builddeps \
     bison \
     bzip2 \

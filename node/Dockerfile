@@ -8,7 +8,7 @@ ENV NODE_VERSION=v6.9.5 \
     NODE_HOME=/usr/local
 
 RUN \
-  echo "@main http://dl-cdn.alpinelinux.org/alpine/3.5/main" >> /etc/apk/repositories \
+  echo "@main http://dl-cdn.alpinelinux.org/alpine/v3.5/main" >> /etc/apk/repositories \
   apk add --no-cache --virtual .node-buildDeps \
     git \
     curl \
