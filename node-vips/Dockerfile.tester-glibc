@@ -1,11 +1,11 @@
-FROM makeomatic/node:7.5.0-vips
+FROM makeomatic/node:6.9.5-vips
 
 ENV GLIBC_VER 2.23-r3
 
 # to build native deps
 RUN \
   apk add --update \
-    vips-dev@local \
+    vips-dev@testing \
     build-base \
     python \
     make \

@@ -1,9 +1,9 @@
 FROM alpine:3.5
 
 LABEL vendor=makeomatic \
-      version_tags="[\"7\",\"7.5\",\"7.5.0\"]"
+      version_tags="[\"6\",\"6.9\",\"6.9.5\"]"
 
-ENV NODE_VERSION=v7.5.0 \
+ENV NODE_VERSION=v6.9.5 \
     NPM_VERSION=4 \
     NODE_HOME=/usr/local \
     RUBY_MAJOR=2.3 \
@@ -27,6 +27,7 @@ RUN \
     echo 'update: --no-document'; \
   } >> /usr/local/etc/gemrc \
   && set -ex \
+  && echo "@main http://dl-cdn.alpinelinux.org/alpine/3.5/main" >> /etc/apk/repositories \
   && apk add --no-cache --virtual .builddeps \
     bison \
     bzip2 \
@@ -59,7 +60,7 @@ RUN \
     libstdc++ \
     linux-headers \
     make \
-    paxctl \
+    paxctl@main \
     python \
   && curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz" \
   && echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.gz" | sha256sum -c - \

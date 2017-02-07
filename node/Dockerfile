@@ -1,13 +1,14 @@
-FROM alpine:3.5
+FROM alpine:edge
 
 LABEL vendor=makeomatic \
-      version_tags="[\"7\",\"7.5\",\"7.5.0\"]"
+      version_tags="[\"6\",\"6.9\",\"6.9.5\"]"
 
-ENV NODE_VERSION=v7.5.0 \
+ENV NODE_VERSION=v6.9.5 \
     NPM_VERSION=4 \
     NODE_HOME=/usr/local
 
 RUN \
+  echo "@main http://dl-cdn.alpinelinux.org/alpine/3.5/main" >> /etc/apk/repositories \
   apk add --no-cache --virtual .node-buildDeps \
     git \
     curl \
@@ -17,7 +18,7 @@ RUN \
     binutils-gold \
     python \
     linux-headers \
-    paxctl \
+    paxctl@main \
     libgcc \
     libstdc++ \
   && curl -sSL https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.gz | tar -xz \

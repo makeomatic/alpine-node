@@ -1,4 +1,4 @@
-FROM makeomatic/node:7.5.0-vips-ssh
+FROM makeomatic/node:6.9.5-vips-ssh
 
 ONBUILD WORKDIR /src
 
@@ -8,7 +8,7 @@ ONBUILD RUN \
   apk add --no-cache --virtual .buildDeps \
     g++ \
     make \
-    vips-dev@local \
+    vips-dev@testing \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production \
   && npm dedupe \
   && apk del .buildDeps .flavorDeps \

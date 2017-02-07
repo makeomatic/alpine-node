@@ -1,4 +1,4 @@
-FROM makeomatic/node:7.5.0-vips
+FROM makeomatic/node:6.9.5-vips
 
 ONBUILD WORKDIR /src
 
@@ -8,7 +8,7 @@ ONBUILD RUN \
     git \
     g++ \
     make \
-    vips-dev@local \
+    vips-dev@testing \
   && npm install --production \
   && npm dedupe \
   && apk del .flavorDeps \
