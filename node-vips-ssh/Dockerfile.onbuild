@@ -8,6 +8,7 @@ ONBUILD RUN \
   apk add --no-cache --virtual .buildDeps \
     g++ \
     make \
+    fftw-dev \
     vips-dev@testing \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production \
   && npm dedupe \

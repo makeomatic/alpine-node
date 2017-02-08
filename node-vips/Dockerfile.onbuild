@@ -8,6 +8,7 @@ ONBUILD RUN \
     git \
     g++ \
     make \
+    fftw-dev \
     vips-dev@testing \
   && npm install --production \
   && npm dedupe \

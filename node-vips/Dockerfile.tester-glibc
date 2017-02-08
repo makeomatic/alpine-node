@@ -5,6 +5,7 @@ ENV GLIBC_VER 2.23-r3
 # to build native deps
 RUN \
   apk add --update \
+    fftw-dev \
     vips-dev@testing \
     build-base \
     python \
