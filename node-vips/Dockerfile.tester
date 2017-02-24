@@ -1,0 +1,20 @@
+FROM makeomatic/node:7.6.0-vips
+
+# to build native deps
+RUN \
+  apk add --update \
+    fftw-dev \
+    vips-dev@testing \
+    build-base \
+    python \
+    make \
+    ca-certificates \
+    openssl \
+    make \
+    g++ \
+    linux-headers \
+  && rm -rf \
+    /etc/apk/cache/* \
+    /var/cache/apk/*
+
+WORKDIR /src
