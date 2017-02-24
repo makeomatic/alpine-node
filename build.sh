@@ -40,6 +40,7 @@ docker-build -v "ssh-onbuild" $BASE_NAME -f node-ssh/Dockerfile.onbuild .
 # build node images with libvips
 docker-build -v "vips" $BASE_NAME -f node-vips/Dockerfile .
 docker-build -v "vips-onbuild" $BASE_NAME -f node-vips/Dockerfile.onbuild .
+docker-build -v "vips-tester" $BASE_NAME -f node-vips/Dockerfile.tester .
 docker-build -v "vips-tester-glibc" $BASE_NAME -f node-vips/Dockerfile.tester-glibc .
 # build node images with libvips & ssh
 docker-build -v "vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile .
