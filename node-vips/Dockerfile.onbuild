@@ -10,7 +10,7 @@ ONBUILD RUN \
     make \
     fftw-dev \
     vips-dev@testing \
-  && yarn install --production
+  && yarn install --production \
   && apk del .flavorDeps \
   && rm -rf \
     /tmp/* \
