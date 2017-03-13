@@ -115,6 +115,6 @@ RUN \
   && rm -rf ~/.yarn \
   && ln -s /usr/local/yarn/bin/yarn /usr/local/bin/yarn \
   && ln -s /usr/local/yarn/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && apk purge curl gpgme
+  && apk del curl gpgme
 
 CMD [ "npm", "start" ]
