@@ -1,4 +1,4 @@
-FROM makeomatic/node:7.6.0
+FROM makeomatic/node:7.7.2
 
 # to build native deps
 RUN \
