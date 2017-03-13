@@ -112,9 +112,9 @@ RUN \
   && curl -o- -L https://yarnpkg.com/install.sh | sh \
   && mkdir /usr/local/yarn \
   && mv ~/.yarn/* /usr/local/yarn \
-  && rm -f ~/.yarn \
+  && rm -rf ~/.yarn \
   && ln -s /usr/local/yarn/bin/yarn /usr/local/bin/yarn \
   && ln -s /usr/local/yarn/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && apk del curl gpgme
+  && apk purge curl gpgme
 
 CMD [ "npm", "start" ]
