@@ -106,4 +106,8 @@ RUN \
   && chmod 777 "$GEM_HOME" "$BUNDLE_BIN" \
   && adduser -S node
 
+# installs yarn
+RUN \
+  curl -o- -L https://yarnpkg.com/install.sh | sh
+
 CMD [ "npm", "start" ]

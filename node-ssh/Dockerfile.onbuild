@@ -6,7 +6,7 @@ ONBUILD WORKDIR /src
 # install packages
 ONBUILD COPY package.json .
 ONBUILD COPY ./keys/* /tmp/.ssh/
-ONBUILD RUN GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" npm install --production && npm dedupe
+ONBUILD RUN GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn install --production
 ONBUILD COPY . /src
 
 # remove ssh

@@ -5,8 +5,7 @@ ONBUILD COPY package.json .
 ONBUILD RUN \
   # be able to handle git pulls from https
   apk --update --no-cache add git \
-  && npm install --production \
-  && npm dedupe \
+  && yarn install --production \
   # cleanup git
   && apk del git \
   && rm -rf \

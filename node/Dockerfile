@@ -45,4 +45,8 @@ RUN \
     ${NODE_HOME}/lib/node_modules/npm/man ${NODE_HOME}/lib/node_modules/npm/doc ${NODE_HOME}/lib/node_modules/npm/html \
   && adduser -S node
 
+# installs yarn
+RUN \
+  curl -o- -L https://yarnpkg.com/install.sh | sh
+
 CMD [ "npm", "start" ]

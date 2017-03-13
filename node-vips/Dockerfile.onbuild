@@ -10,8 +10,7 @@ ONBUILD RUN \
     make \
     fftw-dev \
     vips-dev@testing \
-  && npm install --production \
-  && npm dedupe \
+  && yarn install --production
   && apk del .flavorDeps \
   && rm -rf \
     /tmp/* \
