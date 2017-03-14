@@ -2,7 +2,7 @@ FROM makeomatic/node:7.7.2-vips-ssh
 
 ONBUILD WORKDIR /src
 
-ONBUILD COPY package.json yarh.lock ./
+ONBUILD COPY package.json yarn.lock ./
 ONBUILD COPY ./keys/* /tmp/.ssh/
 ONBUILD RUN \
   apk add --no-cache --virtual .buildDeps \

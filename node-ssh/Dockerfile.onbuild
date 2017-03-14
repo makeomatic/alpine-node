@@ -4,7 +4,7 @@ FROM makeomatic/node:7.7.2-ssh
 ONBUILD WORKDIR /src
 
 # install packages
-ONBUILD COPY package.json yarh.lock ./
+ONBUILD COPY package.json yarn.lock ./
 ONBUILD COPY ./keys/* /tmp/.ssh/
 ONBUILD RUN GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn --production
 ONBUILD COPY . /src
