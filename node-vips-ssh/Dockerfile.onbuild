@@ -2,7 +2,7 @@ FROM makeomatic/node:7.7.2-vips-ssh
 
 ONBUILD WORKDIR /src
 
-ONBUILD COPY package.json .
+ONBUILD COPY package.json yarh.lock ./
 ONBUILD COPY ./keys/* /tmp/.ssh/
 ONBUILD RUN \
   apk add --no-cache --virtual .buildDeps \
@@ -10,7 +10,7 @@ ONBUILD RUN \
     make \
     fftw-dev \
     vips-dev@testing \
-  && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn install --production \
+  && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn --production \
   && apk del .buildDeps .flavorDeps \
   && rm -rf \
     /root/.npm \

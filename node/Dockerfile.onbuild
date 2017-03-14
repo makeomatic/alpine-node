@@ -1,11 +1,11 @@
 FROM makeomatic/node:7.7.2
 
 ONBUILD WORKDIR /src
-ONBUILD COPY package.json .
+ONBUILD COPY package.json yarh.lock ./
 ONBUILD RUN \
   # be able to handle git pulls from https
   apk --update --no-cache add git \
-  && yarn install --production \
+  && yarn --production \
   # cleanup git
   && apk del git \
   && rm -rf \

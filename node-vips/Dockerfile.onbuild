@@ -2,7 +2,7 @@ FROM makeomatic/node:7.7.2-vips
 
 ONBUILD WORKDIR /src
 
-ONBUILD COPY package.json .
+ONBUILD COPY package.json yarh.lock ./
 ONBUILD RUN \
   apk add --no-cache --virtual .flavorDeps \
     git \
@@ -10,7 +10,7 @@ ONBUILD RUN \
     make \
     fftw-dev \
     vips-dev@testing \
-  && yarn install --production \
+  && yarn --production \
   && apk del .flavorDeps \
   && rm -rf \
     /tmp/* \
