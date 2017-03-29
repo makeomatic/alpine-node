@@ -7,11 +7,11 @@
 Contains the following base images:
 
 * node versions:
-  - 7.7.4
-  - 7.7.4-ssh (with openssh installed)
-  - 7.7.4-vips (with libvips installed)
-  - 7.7.4-vips-ssh (ssh+vips)
-  - 7.7.4-ruby (with ruby 2.3.1 installed)
+  - 7.8.0
+  - 7.8.0-ssh (with openssh installed)
+  - 7.8.0-vips (with libvips installed)
+  - 7.8.0-vips-ssh (ssh+vips)
+  - 7.8.0-ruby (with ruby 2.3.1 installed)
 
 ## Currently disabled
 
