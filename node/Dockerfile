@@ -5,7 +5,8 @@ LABEL vendor=makeomatic \
 
 ENV NODE_VERSION=v7.9.0 \
     NPM_VERSION=4 \
-    NODE_HOME=/usr/local
+    NODE_HOME=/usr/local \
+    YARN_VERSION=0.23.1
 
 RUN \
   apk add --no-cache --virtual .node-buildDeps \
@@ -47,13 +48,6 @@ RUN \
 
 # installs yarn
 RUN \
-  apk --no-cache add curl gpgme \
-  && curl -o- -L https://yarnpkg.com/install.sh | sh \
-  && mkdir /usr/local/yarn \
-  && mv ~/.yarn/* /usr/local/yarn \
-  && rm -rf ~/.yarn \
-  && ln -s /usr/local/yarn/bin/yarn /usr/local/bin/yarn \
-  && ln -s /usr/local/yarn/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && apk del curl gpgme
+  npm i -g yarn@${YARN_VERSION}
 
 CMD [ "npm", "start" ]
