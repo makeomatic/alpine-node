@@ -1,0 +1,5 @@
+FROM makeomatic/node:7.10.0-vips-tester-chrome
+
+RUN \
+  echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+  && apk add --no-cache chromium@community
