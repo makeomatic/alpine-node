@@ -42,6 +42,7 @@ docker-build -v "vips" $BASE_NAME -f node-vips/Dockerfile .
 docker-build -v "vips-onbuild" $BASE_NAME -f node-vips/Dockerfile.onbuild .
 docker-build -v "vips-tester" $BASE_NAME -f node-vips/Dockerfile.tester .
 docker-build -v "vips-tester-glibc" $BASE_NAME -f node-vips/Dockerfile.tester-glibc .
+docker-build -v "vips-tester-glibc-chrome" $BASE_NAME -f node-vips/Dockerfile.tester-glibc-chrome .
 # build node images with libvips & ssh
 docker-build -v "vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile .
 docker-build -v "vips-ssh-onbuild" $BASE_NAME -f node-vips-ssh/Dockerfile.onbuild .

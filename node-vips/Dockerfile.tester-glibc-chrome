@@ -1,0 +1,5 @@
+FROM makeomatic/node:7.10.0-vips-tester-glibc
+
+RUN \
+  apk add --no-cache chromium \
+  yarn global add chrome-remote-interface lighthouse

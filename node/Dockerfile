@@ -1,12 +1,12 @@
 FROM alpine:3.5
 
 LABEL vendor=makeomatic \
-      version_tags="[\"7\",\"7.9\",\"7.9.0\"]"
+      version_tags="[\"7\",\"7.10\",\"7.10.0\"]"
 
-ENV NODE_VERSION=v7.9.0 \
+ENV NODE_VERSION=v7.10.0 \
     NPM_VERSION=4 \
     NODE_HOME=/usr/local \
-    YARN_VERSION=0.23.1
+    YARN_VERSION=0.23.4
 
 RUN \
   apk add --no-cache --virtual .node-buildDeps \
