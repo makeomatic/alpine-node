@@ -2,4 +2,6 @@ FROM makeomatic/node:7.10.0-vips-tester
 
 RUN \
   echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-  && apk add --no-cache chromium@community
+  && apk add --no-cache chromium@community grep udev ttf-opensans@testing
+
+ENV LIGHTHOUSE_CHROMIUM_PATH=/usr/bin/chromium-browser

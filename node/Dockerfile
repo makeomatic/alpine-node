@@ -39,15 +39,12 @@ RUN \
       | xargs -r apk info --installed \
       | sort -u \
   )" \
+  && npm i -g yarn@${YARN_VERSION} \
   && apk add --virtual .rundeps $runDeps \
   && apk del .node-buildDeps \
   && rm -rf /node-${NODE_VERSION} \
     ${NODE_HOME}/share/man /tmp/* /root/.npm /root/.node-gyp \
     ${NODE_HOME}/lib/node_modules/npm/man ${NODE_HOME}/lib/node_modules/npm/doc ${NODE_HOME}/lib/node_modules/npm/html \
   && adduser -S node
-
-# installs yarn
-RUN \
-  npm i -g yarn@${YARN_VERSION}
 
 CMD [ "npm", "start" ]

@@ -96,6 +96,7 @@ RUN \
       | xargs -r apk info --installed \
       | sort -u \
   )" \
+  && npm i -g yarn@${YARN_VERSION} \
   && apk add --virtual .rundeps $runDeps \
   && apk del .builddeps \
   && rm -rf /node-${NODE_VERSION} \
@@ -106,9 +107,5 @@ RUN \
   && mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
   && chmod 777 "$GEM_HOME" "$BUNDLE_BIN" \
   && adduser -S node
-
-# installs yarn
-RUN \
-  npm i -g yarn@${YARN_VERSION}
 
 CMD [ "npm", "start" ]
