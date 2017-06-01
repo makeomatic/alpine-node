@@ -1,4 +1,4 @@
-FROM makeomatic/node:8.0.0-vips
+FROM makeomatic/node:8.0.0-tex
 
 ONBUILD WORKDIR /src
 
@@ -8,8 +8,7 @@ ONBUILD RUN \
     git \
     g++ \
     make \
-    fftw-dev \
-    vips-dev@testing \
+    texlive-dev \
   && yarn --production \
   && apk del .flavorDeps \
   && rm -rf \

@@ -1,10 +1,9 @@
-FROM makeomatic/node:8.0.0-vips
+FROM makeomatic/node:8.0.0-tex
 
 # to build native deps
 RUN \
   apk add --update \
-    fftw-dev \
-    vips-dev@testing \
+    texlive-dev \
     build-base \
     python \
     make \

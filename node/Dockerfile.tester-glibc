@@ -1,4 +1,4 @@
-FROM makeomatic/node:7.10.0
+FROM makeomatic/node:8.0.0
 
 ENV GLIBC_VER 2.23-r3
 
