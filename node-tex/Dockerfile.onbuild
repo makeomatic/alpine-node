@@ -1,4 +1,4 @@
-FROM makeomatic/node:8.0.0-tex
+FROM makeomatic/node:8.1.0-tex
 
 ONBUILD WORKDIR /src
 
