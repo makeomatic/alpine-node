@@ -1,0 +1,10 @@
+FROM makeomatic/node:8.1.4-chrome
+
+# to build native deps
+RUN \
+  apk --no-cache add \
+    build-base \
+    python \
+    make
+
+WORKDIR /src

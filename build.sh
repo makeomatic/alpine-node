@@ -37,6 +37,10 @@ docker-build -v "ruby" $BASE_NAME -f node-ruby/Dockerfile .
 # build node images with ssh embedded
 docker-build -v "ssh" $BASE_NAME -f node-ssh/Dockerfile .
 docker-build -v "ssh-onbuild" $BASE_NAME -f node-ssh/Dockerfile.onbuild .
+# chrome-enabled images
+docker-build -v "chrome" $BASE_NAME -f node-chrome/Dockerfile .
+docker-build -v "chrome-onbuild" $BASE_NAME -f node-chrome/Dockerfile.onbuild .
+docker-build -v "chrome-tester" $BASE_NAME -f node-chrome/Dockerfile.tester .
 # build node images with libvips
 docker-build -v "vips" $BASE_NAME -f node-vips/Dockerfile .
 docker-build -v "vips-onbuild" $BASE_NAME -f node-vips/Dockerfile.onbuild .

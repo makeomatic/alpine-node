@@ -1,0 +1,18 @@
+FROM makeomatic/node:8.1.4-chrome
+
+ONBUILD WORKDIR /src
+ONBUILD COPY package.json yarn.lock ./
+ONBUILD RUN \
+  # be able to handle git pulls from https
+  apk --update --no-cache add git \
+  && yarn --production \
+  # cleanup git
+  && apk del git \
+  && rm -rf \
+    /root/.npm \
+    /root/.node-gyp \
+    /tmp/*
+
+ONBUILD COPY . /src
+ONBUILD RUN chown -R node /src
+ONBUILD USER node
