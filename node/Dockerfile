@@ -6,7 +6,7 @@ LABEL vendor=makeomatic \
 ENV NODE_VERSION=v8.2.1 \
     NPM_VERSION=5 \
     NODE_HOME=/usr/local \
-    YARN_VERSION=0.24.6
+    YARN_VERSION=0.27.5
 
 RUN \
   apk add --no-cache --virtual .node-buildDeps \
