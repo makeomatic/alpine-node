@@ -1,4 +1,4 @@
-FROM makeomatic/node:8.4.0-chrome
+FROM makeomatic/node:8.5.0-chrome
 
 ONBUILD WORKDIR /src
 ONBUILD COPY package.json yarn.lock ./
