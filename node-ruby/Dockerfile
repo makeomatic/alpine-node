@@ -1,12 +1,12 @@
 FROM alpine:3.6
 
 LABEL vendor=makeomatic \
-      version_tags="[\"8\",\"8.5\",\"8.5.0\"]"
+      version_tags="[\"8\",\"8.6\",\"8.6.0\"]"
 
-ENV NODE_VERSION=v8.5.0 \
+ENV NODE_VERSION=v8.6.0 \
     NPM_VERSION=5 \
     NODE_HOME=/usr/local \
-    YARN_VERSION=0.27.5 \
+    YARN_VERSION=1.1.0 \
     RUBY_MAJOR=2.3 \
     RUBY_VERSION=2.3.1 \
     RUBY_DOWNLOAD_SHA256=b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd \
