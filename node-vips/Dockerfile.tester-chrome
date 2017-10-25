@@ -1,4 +1,4 @@
-FROM makeomatic/node:8.7.0-vips-tester
+FROM makeomatic/node:8.8.0-vips-tester
 
 RUN \
   echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
