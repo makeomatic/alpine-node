@@ -1,4 +1,4 @@
-FROM makeomatic/node:8.8.0-vips-ssh
+FROM makeomatic/node:8.8.1-vips-ssh
 
 ONBUILD WORKDIR /src
 
