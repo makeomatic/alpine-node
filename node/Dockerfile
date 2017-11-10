@@ -1,15 +1,15 @@
 FROM alpine:3.6
 
 LABEL vendor=makeomatic \
-      version_tags="[\"9\",\"9.0\",\"9.0.0\"]"
+      version_tags="[\"9\",\"9.1\",\"9.1.0\"]"
 
-ENV NODE_VERSION=v9.0.0 \
-    NPM_VERSION=5 \
+ENV NODE_VERSION=v9.1.0 \
     NODE_HOME=/usr/local \
-    YARN_VERSION=1.2.1
+    YARN_VERSION=1.3.2-r0
 
 RUN \
-  apk add --no-cache --virtual .node-buildDeps \
+  apk upgrade --no-cache \
+  && apk add --no-cache --virtual .node-buildDeps \
     git \
     curl \
     make \
@@ -28,10 +28,6 @@ RUN \
   && make install \
   && paxctl -cm ${NODE_HOME}/bin/node \
   && cd / \
-  && if [ -x ${NODE_HOME}/bin/npm ]; then \
-    npm install -g npm@${NPM_VERSION} && \
-    find ${NODE_HOME}/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
-  fi \
   && runDeps="$( \
     scanelf --needed --nobanner --recursive /usr/local \
       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
@@ -39,8 +35,8 @@ RUN \
       | xargs -r apk info --installed \
       | sort -u \
   )" \
-  && npm i -g yarn@${YARN_VERSION} \
-  && apk add --virtual .rundeps $runDeps \
+  && apk --no-cache add yarn@${YARN_VERSION} \
+  && apk --no-cache add --virtual .rundeps $runDeps \
   && apk del .node-buildDeps \
   && rm -rf /node-${NODE_VERSION} \
     ${NODE_HOME}/share/man /tmp/* /root/.npm /root/.node-gyp \
