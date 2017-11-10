@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:edge
 
 LABEL vendor=makeomatic \
       version_tags="[\"9\",\"9.1\",\"9.1.0\"]"
@@ -35,7 +35,7 @@ RUN \
       | xargs -r apk info --installed \
       | sort -u \
   )" \
-  && apk --no-cache add yarn@${YARN_VERSION} \
+  && apk --no-cache add yarn=${YARN_VERSION} \
   && apk --no-cache add --virtual .rundeps $runDeps \
   && apk del .node-buildDeps \
   && rm -rf /node-${NODE_VERSION} \
