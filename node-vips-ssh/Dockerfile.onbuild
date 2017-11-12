@@ -9,7 +9,7 @@ ONBUILD RUN \
     g++ \
     make \
     fftw-dev \
-    vips-dev@testing \
+    vips-dev \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn --production \
   && apk del .buildDeps .flavorDeps \
   && rm -rf \

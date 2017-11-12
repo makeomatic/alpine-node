@@ -4,7 +4,7 @@ FROM makeomatic/node:9.1.0-vips
 RUN \
   apk add --update \
     fftw-dev \
-    vips-dev@testing \
+    vips-dev \
     build-base \
     python \
     make \

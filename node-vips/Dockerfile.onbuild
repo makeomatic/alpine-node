@@ -9,7 +9,7 @@ ONBUILD RUN \
     g++ \
     make \
     fftw-dev \
-    vips-dev@testing \
+    vips-dev \
   && yarn --production \
   && apk del .flavorDeps \
   && rm -rf \
