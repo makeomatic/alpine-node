@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.1.0
+FROM makeomatic/node:9.2.0
 
 RUN \
   echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
