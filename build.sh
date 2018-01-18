@@ -33,7 +33,7 @@ docker-build -v "onbuild" $BASE_NAME -f node/Dockerfile.onbuild .
 docker-build -v "tester" $BASE_NAME -f node/Dockerfile.tester .
 docker-build -v "tester-glibc" $BASE_NAME -f node/Dockerfile.tester-glibc .
 # build node images with ruby
-docker-build -v "ruby" $BASE_NAME -f node-ruby/Dockerfile .
+# docker-build -v "ruby" $BASE_NAME -f node-ruby/Dockerfile .
 # build node images with ssh embedded
 docker-build -v "ssh" $BASE_NAME -f node-ssh/Dockerfile .
 docker-build -v "ssh-onbuild" $BASE_NAME -f node-ssh/Dockerfile.onbuild .
