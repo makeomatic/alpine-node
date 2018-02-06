@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.4.0-vips
+FROM makeomatic/node:9.5.0-vips
 
 # to build native deps
 RUN \
