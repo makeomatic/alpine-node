@@ -5,7 +5,7 @@ ONBUILD COPY package.json yarn.lock ./
 ONBUILD RUN \
   # be able to handle git pulls from https
   apk --update --no-cache add git \
-  && yarn --production \
+  && yarn --production --frozen-lockfile \
   # cleanup git
   && apk del git \
   && rm -rf \

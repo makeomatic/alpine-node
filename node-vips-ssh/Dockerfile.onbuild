@@ -10,7 +10,7 @@ ONBUILD RUN \
     make \
     fftw-dev \
     vips-dev \
-  && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn --production \
+  && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn --production --frozen-lockfile \
   && apk del .buildDeps .flavorDeps \
   && rm -rf \
     /root/.npm \

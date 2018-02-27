@@ -10,7 +10,7 @@ ONBUILD RUN \
     make \
     fftw-dev \
     vips-dev \
-  && yarn --production \
+  && yarn --production --frozen-lockfile \
   && apk del .flavorDeps \
   && rm -rf \
     /tmp/* \
