@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.6.1-vips-tester
+FROM makeomatic/node:9.7.1-vips-tester
 
 ENV GLIBC_VER 2.26-r0
 

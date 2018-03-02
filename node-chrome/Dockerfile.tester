@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.6.1-chrome
+FROM makeomatic/node:9.7.1-chrome
 
 # to build native deps
 RUN \
