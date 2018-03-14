@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.7.1-vips
+FROM makeomatic/node:9.8.0-vips
 
 RUN apk add --no-cache --virtual .flavorDeps \
   openssh \
