@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.10.0
+FROM makeomatic/node:9.10.1
 
 ONBUILD WORKDIR /src
 ONBUILD COPY package.json yarn.lock ./

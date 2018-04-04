@@ -1,7 +1,12 @@
-FROM makeomatic/node:9.10.0
+FROM makeomatic/node:9.10.1
 
-RUN \
-  echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-  && apk add --no-cache --upgrade chromium grep udev ttf-opensans
+# Installs latest Chromium (64) package.
+RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk --no-cache upgrade && \
+    apk --no-cache add \
+      chromium@edge \
+      nss@edge
 
-ENV LIGHTHOUSE_CHROMIUM_PATH=/usr/bin/chromium-browser
+# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
