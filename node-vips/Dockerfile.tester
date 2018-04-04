@@ -1,8 +1,8 @@
-FROM makeomatic/node:9.10.1-vips
+FROM makeomatic/node:9.11.0-vips
 
 # to build native deps
 RUN \
-  apk add --update \
+  apk --update add \
     fftw-dev \
     vips-dev \
     build-base \
