@@ -1,4 +1,4 @@
-FROM makeomatic/node:9.11.0-vips
+FROM makeomatic/node:10.0.0-vips
 
 ONBUILD WORKDIR /src
 
