@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.0.0
+FROM makeomatic/node:9.11.1
 
 # Installs latest Chromium (64) package.
 RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
@@ -6,7 +6,8 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     apk --no-cache upgrade && \
     apk --no-cache add \
       chromium@edge \
-      nss@edge
+      nss@edge \
+      font-noto@edge
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
