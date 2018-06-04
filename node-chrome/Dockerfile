@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.2.1
+FROM makeomatic/node:10.3.0
 
 # Installs latest Chromium (64) package.
 RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
