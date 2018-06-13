@@ -1,11 +1,12 @@
 FROM alpine:3.7
 
 LABEL vendor=makeomatic \
-      version_tags="[\"10\",\"10.3\",\"10.3.0\"]"
+      version_tags="[\"9\",\"9.11\",\"9.11.2\"]"
 
-ENV NODE_VERSION=10.3.0
+ENV NODE_VERSION=9.11.2
 
-RUN addgroup -g 1000 node \
+RUN apk --no-cache upgrade \
+    && addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
     && apk add --no-cache \
         libstdc++ \
