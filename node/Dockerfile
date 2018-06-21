@@ -1,9 +1,9 @@
 FROM alpine:3.7
 
 LABEL vendor=makeomatic \
-      version_tags="[\"9\",\"9.11\",\"9.11.2\"]"
+      version_tags="[\"10\",\"10.5\",\"10.5.0\"]"
 
-ENV NODE_VERSION=9.11.2
+ENV NODE_VERSION=10.5.0
 
 RUN apk --no-cache upgrade \
     && addgroup -g 1000 node \
