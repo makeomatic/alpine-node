@@ -1,9 +1,9 @@
 FROM alpine:3.8
 
 LABEL vendor=makeomatic \
-      version_tags="[\"10\",\"10.8\",\"10.8.0\"]"
+      version_tags="[\"10\",\"10.9\",\"10.9.0\"]"
 
-ENV NODE_VERSION 10.8.0
+ENV NODE_VERSION 10.9.0
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
@@ -49,7 +49,7 @@ RUN addgroup -g 1000 node \
     && rm -Rf "node-v$NODE_VERSION" \
     && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
-ENV YARN_VERSION 1.9.2
+ENV YARN_VERSION 1.9.4
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
