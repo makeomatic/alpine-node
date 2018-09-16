@@ -50,6 +50,8 @@ docker-build -v "vips-tester-chrome" $BASE_NAME -f node-vips/Dockerfile.tester-c
 # build node images with libvips & ssh
 docker-build -v "vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile .
 docker-build -v "vips-ssh-onbuild" $BASE_NAME -f node-vips-ssh/Dockerfile.onbuild .
+# build ci container with node and kubernetes tooks
+docker-build -v "ci" $BASE_NAME -f node-ci/Dockerfile .
 
 # List of newly created images
 images=$(docker images "$BASE_NAME" --format "{{ .Repository }}:{{ .Tag }}")
