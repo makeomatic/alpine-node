@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.9.0-vips
+FROM makeomatic/node:10.10.0-vips
 
 ONBUILD WORKDIR /src
 
@@ -12,6 +12,7 @@ ONBUILD RUN \
     vips-dev \
   && yarn --production --frozen-lockfile \
   && apk del .flavorDeps \
+  && yarn cache clean \
   && rm -rf \
     /tmp/* \
     /root/.node-gyp \

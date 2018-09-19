@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.9.0-chrome
+FROM makeomatic/node:10.10.0-chrome
 
 ONBUILD WORKDIR /src
 ONBUILD COPY package.json yarn.lock ./
@@ -8,6 +8,7 @@ ONBUILD RUN \
   && yarn --production --frozen-lockfile \
   # cleanup git
   && apk del git \
+  && yarn cache clean \
   && rm -rf \
     /root/.npm \
     /root/.node-gyp \

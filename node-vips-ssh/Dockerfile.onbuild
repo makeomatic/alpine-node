@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.9.0-vips-ssh
+FROM makeomatic/node:10.10.0-vips-ssh
 
 ONBUILD WORKDIR /src
 
@@ -12,6 +12,7 @@ ONBUILD RUN \
     vips-dev \
   && GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa -F /dev/null" yarn --production --frozen-lockfile \
   && apk del .buildDeps .flavorDeps \
+  && yarn cache clean \
   && rm -rf \
     /root/.npm \
     /root/.node-gyp \

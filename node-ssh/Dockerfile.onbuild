@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.9.0-ssh
+FROM makeomatic/node:10.10.0-ssh
 
 # copy stuff in
 ONBUILD WORKDIR /src
@@ -12,6 +12,7 @@ ONBUILD COPY . /src
 # remove ssh
 ONBUILD RUN \
   apk del .flavorDeps \
+  && yarn cache clean \
   && rm -rf \
     /src/keys \
     /root/.npm \
