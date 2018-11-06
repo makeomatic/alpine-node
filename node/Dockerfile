@@ -1,7 +1,7 @@
 FROM alpine:3.8
 
 LABEL vendor=makeomatic \
-      version_tags="[\"10\",\"10.12\",\"10.13.0\"]"
+      version_tags="[\"10\",\"10.13\",\"10.13.0\"]"
 
 ENV NODE_VERSION 10.13.0
 
