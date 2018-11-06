@@ -8,8 +8,8 @@ ONBUILD RUN \
     git \
     g++ \
     make \
-    fftw-dev \
-    vips-dev \
+    fftw-dev@edge \
+    vips-dev@edge \
   && yarn --production --frozen-lockfile \
   && apk del .flavorDeps \
   && yarn cache clean \

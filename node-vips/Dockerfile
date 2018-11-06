@@ -2,7 +2,7 @@ FROM makeomatic/node:10.13.0
 
 # add libvips
 RUN \
-  echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+  echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
   && apk add --no-cache \
-    fftw \
-    vips
+    fftw@edge \
+    vips@edge
