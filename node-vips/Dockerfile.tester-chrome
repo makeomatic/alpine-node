@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.12.0-vips-tester
+FROM makeomatic/node:10.13.0-vips-tester
 
 # Installs latest Chromium (64) package.
 RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
