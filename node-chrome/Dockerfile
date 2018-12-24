@@ -7,7 +7,9 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     apk --no-cache add \
       chromium@edge \
       nss@edge \
-      font-noto@edge
+      font-noto@edge \
+      harfbuzz@edge \
+      freetype@edge
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
