@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.15.0
+FROM makeomatic/node:10.15.1
 
 # add extra packages
 RUN \
