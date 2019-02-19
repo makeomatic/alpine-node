@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
 LABEL vendor=makeomatic \
       version_tags="[\"10\",\"10.15\",\"10.15.1\"]"

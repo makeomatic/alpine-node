@@ -1,12 +1,12 @@
 FROM makeomatic/node:10.15.1-vips-tester
 
-# Installs latest Chromium (64) package.
+# Installs latest Chromium (71) package.
 RUN \
     apk --no-cache upgrade && \
     apk --no-cache add \
-      chromium@edge \
-      nss@edge \
-      font-noto@edge
+      chromium \
+      nss \
+      font-noto
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
