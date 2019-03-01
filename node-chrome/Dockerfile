@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.15.1
+FROM makeomatic/node:10.15.2
 
 # Installs latest Chromium (71) package.
 RUN apk --no-cache upgrade && \
