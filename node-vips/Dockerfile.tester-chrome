@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.15.2-vips-tester
+FROM makeomatic/node:10.15.3-vips-tester
 
 # Installs latest Chromium (71) package.
 RUN \

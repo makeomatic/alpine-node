@@ -7,11 +7,11 @@
 Contains the following base images:
 
 * node versions:
-  - 10.15.2
-  - 10.15.2-ssh (with openssh installed)
-  - 10.15.2-vips (with libvips installed)
-  - 10.15.2-vips-ssh (ssh+vips)
-  - 10.15.2-ruby (with ruby 2.3.1 installed)
+  - 10.15.3
+  - 10.15.3-ssh (with openssh installed)
+  - 10.15.3-vips (with libvips installed)
+  - 10.15.3-vips-ssh (ssh+vips)
+  - 10.15.3-ruby (with ruby 2.3.1 installed)
 
 ## Currently disabled
 
