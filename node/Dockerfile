@@ -1,9 +1,9 @@
 FROM alpine:3.9.3
 
 LABEL vendor=makeomatic \
-      version_tags="[\"10\",\"10.15\",\"10.15.3\"]"
+      version_tags="[\"12\",\"12.1\",\"12.1.0\"]"
 
-ENV NODE_VERSION 10.15.3
+ENV NODE_VERSION 12.1.0
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
