@@ -1,4 +1,4 @@
-FROM makeomatic/node:10.15.3
+FROM makeomatic/node:12.1.0
 
 # https://www.telepresence.io/reference/install#dependencies
 # NOTE: python2 is required for gcloud and telepresence requires python3
