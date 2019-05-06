@@ -6,8 +6,12 @@
 
 set -o errexit
 
-while getopts "v:c:f:p" opt; do
+while getopts "t:v:c:f:p" opt; do
     case $opt in
+        t)
+          # custom temporary image name
+          _tempname=$OPTARG
+          ;;
         p)
           # also push to remote repo
           push=true
@@ -33,7 +37,7 @@ if [ -z "$file" ]; then
 fi
 
 image="makeomatic/node"
-tempname=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 32 | head -n 1)
+tempname=${_tempname:-`cat /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 32 | head -n 1`}
 versions_label="version_tags"
 cachename="$image:$cache"
 
@@ -61,8 +65,8 @@ for version in $versions; do
   echo "==> tagged: $image:$tag"
 done
 
-### remove unwanted images
-docker rmi $tempname
+### remove unwanted images if we not specify exact temp name (test purposes)
+[ -z $_tempname ] &&  docker rmi $tempname
 
 ### push images to remote repository
 if [ ! -z "$push" ]; then
