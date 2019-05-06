@@ -1,101 +1,24 @@
-#TODO: autopromote on master to push images
-# https://docs.semaphoreci.com/article/50-pipeline-yaml#auto_promote_on
 version: v1.0
-name: Buld and publich nodejs images set
+name: Test images
+
 agent:
   machine:
     type: e1-standard-8
     os_image: ubuntu1804
+
+promotions:
+- name: Deploy
+  pipeline_file: deploy.yml
+  auto_promote_on:
+    - result: passed
+      branch:
+        - ^semaphore$
+
 blocks:
 
-### 1) build and publish core image first
-  - name: Core nodejs image
+  - name: Dummy tests
     task:
-      secrets:
-      - name: docker-hub
-      prologue:
-        commands:
-          - checkout
-          - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
       jobs:
-      - name: nodejs
+      - name: Dummy
         commands:
-          - ./build.sh -f node/Dockerfile -p
-
-### 2) build and publish images which has core as dependency
-  - name: Core-dependent images
-    task:
-      secrets:
-      - name: docker-hub
-      prologue:
-        commands:
-          - checkout
-          - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-      jobs:
-        - name: onbuild
-          commands:
-            - ./build.sh -v onbuild -f node/Dockerfile.onbuild -p
-        - name: tester
-          commands:
-            - ./build.sh -v tester -f node/Dockerfile.tester -p
-        - name: tester-glibc
-          commands:
-            - ./build.sh -v tester-glibc -f node/Dockerfile.tester-glibc -p
-        - name: ssh
-          commands:
-            - ./build.sh -v ssh -f node-ssh/Dockerfile -p
-        - name: chrome
-          commands:
-            - ./build.sh -v chrome -f node-chrome/Dockerfile -p
-        - name: vips
-          commands:
-            - ./build.sh -v vips -f node-vips/Dockerfile -p
-
-### 2) build and publish images which has previous dependencies
-  - name: Dependent images - 1
-    task:
-      secrets:
-      - name: docker-hub
-      prologue:
-        commands:
-          - checkout
-          - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-      jobs:
-        - name: ssh-onbuild
-          commands:
-            - ./build.sh -v ssh-onbuild -f node-ssh/Dockerfile.onbuild -p
-        - name: chrome-onbuild
-          commands:
-            - ./build.sh -v chrome-onbuild -f node-chrome/Dockerfile.onbuild -p
-        - name: chrome-tester
-          commands:
-            - ./build.sh -v chrome-tester -f node-chrome/Dockerfile.tester -p
-        - name: vips-onbuild
-          commands:
-            - ./build.sh -v vips-onbuild -f node-vips/Dockerfile.onbuild -p
-        - name: vips-tester
-          commands:
-            - ./build.sh -v vips-tester -f node-vips/Dockerfile.tester -p
-        - name: vips-ssh
-          commands:
-            - ./build.sh -v vips-ssh -f node-vips-ssh/Dockerfile -p
-
-### 3) build and publish images which has previous dependencies
-  - name: Dependent images - 2
-    task:
-      secrets:
-      - name: docker-hub
-      prologue:
-        commands:
-          - checkout
-          - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-      jobs:
-        - name: vips-tester-glibc
-          commands:
-            - ./build.sh -v vips-tester-glibc -f node-vips/Dockerfile.tester-glibc -p
-        - name: vips-tester-chrome
-          commands:
-            - ./build.sh -v vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -p
-        - name: vips-ssh-onbuild
-          commands:
-            - ./build.sh -v vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -p
+          - echo "few tests can go here"
