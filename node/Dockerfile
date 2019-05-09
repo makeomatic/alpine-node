@@ -1,6 +1,6 @@
-FROM node:12.1.0-alpine
+FROM node:12.2.0-alpine
 
 LABEL vendor=makeomatic \
-      version_tags="[\"12\",\"12.1\",\"12.1.0\"]"
+      version_tags="[\"12\",\"12.2\",\"12.2.0\"]"
 
 CMD [ "yarn", "start" ]
