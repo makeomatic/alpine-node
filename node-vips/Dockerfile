@@ -1,4 +1,4 @@
-FROM makeomatic/node:12.1.0
+FROM makeomatic/node:$VERSION
 
 # add libvips
 RUN \

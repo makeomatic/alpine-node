@@ -1,4 +1,4 @@
-FROM makeomatic/node:12.1.0-vips-tester
+FROM makeomatic/node:$VERSION-vips-tester
 
 # Installs latest Chromium (73) package.
 RUN \

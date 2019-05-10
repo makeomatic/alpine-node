@@ -15,7 +15,7 @@ promotions:
         - ^master$
 
 blocks:
-
+  # NOTE: this is a POC of docker images tests and not intended for real testing
   - name: Basic image tests
     task:
       secrets:
@@ -27,5 +27,5 @@ blocks:
       jobs:
       - name: nodejs
         commands:
-          - ./build.sh -f node/Dockerfile -t test
+          - ./build.sh -f node/Dockerfile -t test -v 12.2.0
           - container-structure-test test --image test --config node/test.yml

@@ -1,4 +1,4 @@
-FROM makeomatic/node:12.1.0
+FROM makeomatic/node:$VERSION
 
 # to build native deps
 RUN \

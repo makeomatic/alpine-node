@@ -11,6 +11,9 @@ blocks:
 ### 1) build and publish core image first
   - name: Core nodejs image
     task:
+      env_vars:
+      - name: NODE_VERSION
+        value: "12.2.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -20,11 +23,14 @@ blocks:
       jobs:
       - name: nodejs
         commands:
-          - ./build.sh -f node/Dockerfile -p
+          - ./build.sh -f node/Dockerfile -v $NODE_VERSION -p
 
 ### 2) build and publish images which has core as dependency
   - name: Core-dependent images
     task:
+      env_vars:
+      - name: NODE_VERSION
+        value: "12.2.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -34,26 +40,29 @@ blocks:
       jobs:
         - name: onbuild
           commands:
-            - ./build.sh -v onbuild -f node/Dockerfile.onbuild -p
+            - ./build.sh -a onbuild -f node/Dockerfile.onbuild -v $NODE_VERSION -p
         - name: tester
           commands:
-            - ./build.sh -v tester -f node/Dockerfile.tester -p
+            - ./build.sh -a tester -f node/Dockerfile.tester -v $NODE_VERSION -p
         - name: tester-glibc
           commands:
-            - ./build.sh -v tester-glibc -f node/Dockerfile.tester-glibc -p
+            - ./build.sh -a tester-glibc -f node/Dockerfile.tester-glibc -v $NODE_VERSION -p
         - name: ssh
           commands:
-            - ./build.sh -v ssh -f node-ssh/Dockerfile -p
+            - ./build.sh -a ssh -f node-ssh/Dockerfile -v $NODE_VERSION -p
         - name: chrome
           commands:
-            - ./build.sh -v chrome -f node-chrome/Dockerfile -p
+            - ./build.sh -a chrome -f node-chrome/Dockerfile -v $NODE_VERSION -p
         - name: vips
           commands:
-            - ./build.sh -v vips -f node-vips/Dockerfile -p
+            - ./build.sh -a vips -f node-vips/Dockerfile -v $NODE_VERSION -p
 
 ### 2) build and publish images which has previous dependencies
   - name: Dependent images - 1
     task:
+      env_vars:
+      - name: NODE_VERSION
+        value: "12.2.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -63,26 +72,29 @@ blocks:
       jobs:
         - name: ssh-onbuild
           commands:
-            - ./build.sh -v ssh-onbuild -f node-ssh/Dockerfile.onbuild -p
+            - ./build.sh -a ssh-onbuild -f node-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
         - name: chrome-onbuild
           commands:
-            - ./build.sh -v chrome-onbuild -f node-chrome/Dockerfile.onbuild -p
+            - ./build.sh -a chrome-onbuild -f node-chrome/Dockerfile.onbuild -v $NODE_VERSION -p
         - name: chrome-tester
           commands:
-            - ./build.sh -v chrome-tester -f node-chrome/Dockerfile.tester -p
+            - ./build.sh -a chrome-tester -f node-chrome/Dockerfile.tester -v $NODE_VERSION -p
         - name: vips-onbuild
           commands:
-            - ./build.sh -v vips-onbuild -f node-vips/Dockerfile.onbuild -p
+            - ./build.sh -a vips-onbuild -f node-vips/Dockerfile.onbuild -v $NODE_VERSION -p
         - name: vips-tester
           commands:
-            - ./build.sh -v vips-tester -f node-vips/Dockerfile.tester -p
+            - ./build.sh -a vips-tester -f node-vips/Dockerfile.tester -v $NODE_VERSION -p
         - name: vips-ssh
           commands:
-            - ./build.sh -v vips-ssh -f node-vips-ssh/Dockerfile -p
+            - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
 
 ### 3) build and publish images which has previous dependencies
   - name: Dependent images - 2
     task:
+      env_vars:
+      - name: NODE_VERSION
+        value: "12.2.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -92,10 +104,10 @@ blocks:
       jobs:
         - name: vips-tester-glibc
           commands:
-            - ./build.sh -v vips-tester-glibc -f node-vips/Dockerfile.tester-glibc -p
+            - ./build.sh -a vips-tester-glibc -f node-vips/Dockerfile.tester-glibc -v $NODE_VERSION -p
         - name: vips-tester-chrome
           commands:
-            - ./build.sh -v vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -p
+            - ./build.sh -a vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -v $NODE_VERSION -p
         - name: vips-ssh-onbuild
           commands:
-            - ./build.sh -v vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -p
+            - ./build.sh -a vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -v $NODE_VERSION -p

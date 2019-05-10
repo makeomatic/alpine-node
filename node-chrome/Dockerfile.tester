@@ -1,4 +1,4 @@
-FROM makeomatic/node:12.1.0-chrome
+FROM makeomatic/node:$VERSION-chrome
 
 # to build native deps
 RUN \
