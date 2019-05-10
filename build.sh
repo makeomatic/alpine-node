@@ -33,15 +33,15 @@ if [ -z "$file" ] || [ -z "$VERSION" ]; then
   echo "
 USAGE: cmd -f ./Dockerfile -v 1.12.0 [-p postfix] [-c cache-tag]
 
-  following script generates set of images based on source LABEL version_tags
+  current script generates set of images based on source LABEL version_tags
 
   arguments:
   -f: path to Dockerfile (requred)
   -v: nodejs version (required)
-  -a: specifies postfix wich will be appended to version tag, if not set - additional 'latest' tag will be generated
-  -p: also push build image to remote repo
+  -a: version postfix, if not set - additional 'latest' tag will be generated
+  -p: push build image to remote repo
   -t: custom temporary image name, it won't be deleted, useful for tests
-  -c: image with layer to reuse, useful for speeding up builds
+  -c: image with layer to reuse, useful for speeding up the builds
 "
   exit 1
 fi
@@ -52,7 +52,7 @@ if [[ $VERSION =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
   patch="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
   VERSION_TAGS="[\\\"$major\\\",\\\"$minor\\\",\\\"$patch\\\"]"
 else
-  echo "Version $VERSION does not semver-compatible"
+  echo "Version $VERSION is not semver-compatible"
   exit 1
 fi
 
@@ -67,7 +67,7 @@ tmpfile=$(mktemp /tmp/dockerfile.XXXXXX)
 export VERSION
 export VERSION_TAGS
 
-# we specify here exat variables to replace so envsubst won't touch the rest
+# we specify here exact variables to replace so envsubst won't touch the rest
 envsubst '${VERSION} ${VERSION_TAGS}' < $file > $tmpfile
 
 ### create temp container
