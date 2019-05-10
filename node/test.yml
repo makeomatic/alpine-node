@@ -1,0 +1,20 @@
+# https://github.com/GoogleContainerTools/container-structure-test
+schemaVersion: '2.0.0'
+
+commandTests:
+  - name: node
+    command: which
+    args: ["node"]
+    expectedOutput: ["/usr/local/bin/node"]
+  - name: yarn
+    command: which
+    args: ["yarn"]
+    expectedOutput: ["/usr/local/bin/yarn"]
+
+metadataTest:
+  labels:
+    - key: vendor
+      value: makeomatic
+  entrypoint: []
+  cmd: ["yarn", "start"]
+  workdir: ""

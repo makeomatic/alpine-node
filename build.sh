@@ -1,64 +1,78 @@
 #!/bin/bash
 
-set -e
+###
+# build selected dockerfile and tag it based in labels
+##
 
-#set the DEBUG env variable to turn on debugging
-[[ -n "$DEBUG" ]] && set -x
+set -o errexit
 
-# global env vars
-export \
-  PROJECT=node \
-  NAMESPACE=makeomatic \
-  PUSH_NAMESPACES=makeomatic \
-  BASE_NAME=makeomatic/node
+while getopts "t:v:c:f:p" opt; do
+    case $opt in
+        t)
+          # custom temporary image name
+          _tempname=$OPTARG
+          ;;
+        p)
+          # also push to remote repo
+          push=true
+          ;;
+        c)
+          # specifies image tag with layers to speed up the build
+          cache=$OPTARG
+          ;;
+        v)
+          # specifies variant which is appended to versions (aka: image:16.04-variant)
+          # if is not set - also "latest" tag will be generated
+          variant=$OPTARG
+          ;;
+        f)
+          file=$OPTARG
+          ;;
+    esac
+done
 
-BRANCH_NAME=${BRANCH_NAME:-$(git branch | grep  ^*|cut -d" " -f2)}
-echo "working in $BRANCH_NAME"
-BRANCH_NAME=$(echo $BRANCH_NAME | sed -e "s/\//-/g")
-echo "tagging as $BRANCH_NAME"
+if [ -z "$file" ]; then
+  echo "USAGE: cmd -f ./Dockerfile [-p postfix] [-c cache-tag]"
+  exit 1
+fi
 
-# install basic scripts
-curl -sSL https://github.com/makeomatic/ci-scripts/raw/master/install.sh | sh -s
-[ -d ~/official-images ] || git clone https://github.com/docker-library/official-images.git ~/official-images
+image="makeomatic/node"
+tempname=${_tempname:-`cat /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 32 | head -n 1`}
+versions_label="version_tags"
+cachename="$image:$cache"
 
-# add scripts to PATH
-export PATH=$PATH:~/ci-scripts
+### create temp container
+[ ! -z "$cache" ] && docker pull $cachename
 
-# cleanup logs
-rm -rf ./*.log
+buildArgs=("--tag $tempname" "--file $file")
+[ ! -z "$cache" ] && buildArgs+=("--cache-from $cachename")
+buildArgsStr=$(printf " %s" "${buildArgs[@]}")
 
-# build base node images that are used further in the project
-docker-build $BASE_NAME -f node/Dockerfile .
-docker-build -v "onbuild" $BASE_NAME -f node/Dockerfile.onbuild .
-docker-build -v "tester" $BASE_NAME -f node/Dockerfile.tester .
-docker-build -v "tester-glibc" $BASE_NAME -f node/Dockerfile.tester-glibc .
-# build node images with ruby
-# docker-build -v "ruby" $BASE_NAME -f node-ruby/Dockerfile .
-# build node images with ssh embedded
-docker-build -v "ssh" $BASE_NAME -f node-ssh/Dockerfile .
-docker-build -v "ssh-onbuild" $BASE_NAME -f node-ssh/Dockerfile.onbuild .
-# chrome-enabled images
-docker-build -v "chrome" $BASE_NAME -f node-chrome/Dockerfile .
-docker-build -v "chrome-onbuild" $BASE_NAME -f node-chrome/Dockerfile.onbuild .
-docker-build -v "chrome-tester" $BASE_NAME -f node-chrome/Dockerfile.tester .
-# build node images with libvips
-docker-build -v "vips" $BASE_NAME -f node-vips/Dockerfile .
-docker-build -v "vips-onbuild" $BASE_NAME -f node-vips/Dockerfile.onbuild .
-docker-build -v "vips-tester" $BASE_NAME -f node-vips/Dockerfile.tester .
-docker-build -v "vips-tester-glibc" $BASE_NAME -f node-vips/Dockerfile.tester-glibc .
-docker-build -v "vips-tester-chrome" $BASE_NAME -f node-vips/Dockerfile.tester-chrome .
-# build node images with libvips & ssh
-docker-build -v "vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile .
-docker-build -v "vips-ssh-onbuild" $BASE_NAME -f node-vips-ssh/Dockerfile.onbuild .
-# build ci container with node and kubernetes tooks
-docker-build -v "ci" $BASE_NAME -f node-ci/Dockerfile .
+docker build $buildArgsStr .
 
-# List of newly created images
-images=$(docker images "$BASE_NAME" --format "{{ .Repository }}:{{ .Tag }}")
+### generate tags based on image labels
+[ `uname` = "Darwin" ] && opts="-E" || opts="-r"
+versions=$(docker inspect -f "{{.Config.Labels.$versions_label}}" $tempname | sed $opts -e 's/"|\[|\]//g' -e 's/,/ /g')
 
-# we actually need to
-# Push to docker when DEPLOY is true
-[ ${BRANCH_NAME} = master ] && for image in $images; do docker push $image; done
+[ -z $variant ] && versions+=("latest")
 
-# report
-docker images $BASE_NAME
+### tag images
+for version in $versions; do
+  tag=${version}-${variant}
+  tag=${tag%-}
+
+  docker tag $tempname $image:$tag
+  echo "==> tagged: $image:$tag"
+done
+
+### remove unwanted images if we not specify exact temp name (test purposes)
+[ -z $_tempname ] &&  docker rmi $tempname
+
+### push images to remote repository
+if [ ! -z "$push" ]; then
+  for version in $versions; do
+    tag=${version}-${variant}
+    tag=${tag%-}
+    docker push $image:$tag
+  done
+fi
