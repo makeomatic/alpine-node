@@ -85,6 +85,9 @@ blocks:
         - name: vips-tester
           commands:
             - ./build.sh -a vips-tester -f node-vips/Dockerfile.tester -v $NODE_VERSION -p
+        - name: vips-tester-docker
+          commands:
+            - ./build.sh -a vips-tester-docker -f node-vips/Dockerfile.tester-docker -v $NODE_VERSION -p
         - name: vips-ssh
           commands:
             - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
