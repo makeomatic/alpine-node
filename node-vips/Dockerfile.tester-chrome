@@ -4,9 +4,9 @@ FROM makeomatic/node:$VERSION-vips-tester
 RUN \
     apk --no-cache upgrade && \
     apk --no-cache add \
-      chromium \
-      nss \
-      font-noto
+      chromium@edge \
+      nss@edge \
+      font-noto@edge
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
