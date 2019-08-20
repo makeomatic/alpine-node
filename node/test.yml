@@ -17,6 +17,6 @@ metadataTest:
       value: makeomatic
     - key: version_tags
       value: "[\"10\",\"10.16\",\"10.16.3\"]"
-  entrypoint: []
+  entrypoint: ["docker-entrypoint.sh"]
   cmd: ["yarn", "start"]
   workdir: ""
