@@ -16,7 +16,7 @@ metadataTest:
     - key: vendor
       value: makeomatic
     - key: version_tags
-      value: "[\"12\",\"12.2\",\"12.2.0\"]"
+      value: "[\"10\",\"10.16\",\"10.16.3\"]"
   entrypoint: []
   cmd: ["yarn", "start"]
   workdir: ""
