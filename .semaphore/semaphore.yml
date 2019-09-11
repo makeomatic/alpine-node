@@ -4,7 +4,6 @@ name: Test images
 agent:
   machine:
     type: e1-standard-4
-    os_image: ubuntu1804
 
 promotions:
 - name: Deploy LTS
@@ -27,10 +26,12 @@ blocks:
     task:
       secrets:
       - name: docker-hub
+
       prologue:
         commands:
           - checkout
           - curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 && chmod +x container-structure-test-linux-amd64 && mkdir -p $HOME/bin && export PATH=$PATH:$HOME/bin && mv container-structure-test-linux-amd64 $HOME/bin/container-structure-test
+
       jobs:
       - name: nodejs
         commands:
