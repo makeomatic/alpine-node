@@ -1,5 +1,5 @@
 version: v1.0
-name: Deploy images
+name: Deploy Latest
 
 agent:
   machine:
@@ -13,7 +13,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "10.16.3"
+        value: "12.10.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -30,7 +30,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "10.16.3"
+        value: "12.10.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -62,7 +62,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "10.16.3"
+        value: "12.10.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -97,7 +97,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "10.16.3"
+        value: "12.10.0"
       secrets:
       - name: docker-hub
       prologue:

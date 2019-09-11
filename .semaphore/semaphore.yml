@@ -7,8 +7,15 @@ agent:
     os_image: ubuntu1804
 
 promotions:
-- name: Deploy
-  pipeline_file: deploy.yml
+- name: Deploy LTS
+  pipeline_file: deploy.lts.yml
+  auto_promote_on:
+    - result: passed
+      branch:
+        - ^master$
+
+- name: Deploy Latest
+  pipeline_file: deploy.latest.yml
   auto_promote_on:
     - result: passed
       branch:
