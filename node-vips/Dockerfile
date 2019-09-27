@@ -9,10 +9,5 @@ RUN \
     fftw \
     vips
 
-# Add Chrome as a user
-RUN mkdir -p /src \
-    && adduser -D node \
-    && chown -R node:node /src
-
 ENV CHROME_BIN=/usr/bin/chromium-browser \
     CHROME_PATH=/usr/lib/chromium/
