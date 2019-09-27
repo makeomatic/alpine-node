@@ -2,7 +2,7 @@ FROM makeomatic/node:$VERSION-vips
 
 # to build native deps
 RUN \
-  && apk --no-cache upgrade \
+  apk --no-cache upgrade \
   && apk --no-cache add \
     fftw-dev \
     vips-dev \
