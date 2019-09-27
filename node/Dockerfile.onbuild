@@ -15,5 +15,5 @@ ONBUILD RUN \
     /tmp/*
 
 ONBUILD COPY . /src
-ONBUILD RUN chown -R node /src
+ONBUILD RUN chown -R node:node /src
 ONBUILD USER node

@@ -20,6 +20,6 @@ ONBUILD RUN \
 
 ONBUILD COPY . /src
 ONBUILD RUN \
-  chown -R node /src \
+  chown -R node:node /src \
   && rm -rf /src/keys
 ONBUILD USER node

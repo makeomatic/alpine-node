@@ -2,12 +2,10 @@ FROM makeomatic/node:$VERSION-vips
 
 # to build native deps
 RUN \
-  echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-  && echo "@edge http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
   && apk --no-cache upgrade \
   && apk --no-cache add \
-    fftw-dev@edge \
-    vips-dev@edge \
+    fftw-dev \
+    vips-dev \
     build-base \
     python \
     make \
@@ -23,7 +21,7 @@ RUN \
     gcc \
     libc-dev \
     curl \
-  && curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-19.03.0.tgz | tar --strip-components=1 -xvzf - -C /bin docker/docker \
+  && curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-19.03.2.tgz | tar --strip-components=1 -xvzf - -C /bin docker/docker \
   && pip install docker-compose \
   && rm -rf \
     /etc/apk/cache/* \

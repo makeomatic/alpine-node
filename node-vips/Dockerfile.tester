@@ -2,12 +2,12 @@ FROM makeomatic/node:$VERSION-vips
 
 # to build native deps
 RUN \
-  echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-  && echo "@edge http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+  echo "http://nl.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories \
+  && echo "http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
   && apk --no-cache upgrade \
   && apk --no-cache add \
-    fftw-dev@edge \
-    vips-dev@edge \
+    fftw-dev \
+    vips-dev \
     build-base \
     python \
     make \

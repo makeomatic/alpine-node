@@ -8,8 +8,8 @@ ONBUILD RUN \
     git \
     g++ \
     make \
-    fftw-dev@edge \
-    vips-dev@edge \
+    fftw-dev \
+    vips-dev \
   && yarn --production --frozen-lockfile \
   && apk del .flavorDeps \
   && yarn cache clean \
@@ -19,5 +19,5 @@ ONBUILD RUN \
     /root/.npm
 
 ONBUILD COPY . /src
-ONBUILD RUN chown -R node /src
+ONBUILD RUN chown -R node:node /src
 ONBUILD USER node
