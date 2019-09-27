@@ -6,7 +6,7 @@ RUN \
   && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
   && apk --no-cache upgrade \
   && apk --no-cache add \
-    fftw
+    fftw \
     vips
 
 # Add Chrome as a user
