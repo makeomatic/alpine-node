@@ -5,6 +5,12 @@ RUN \
   apk --no-cache add \
     build-base \
     python \
-    make
+    make \
+    lz4-dev \
+    musl-dev \
+    cyrus-sasl-dev \
+    openssl-dev \
+    zlib-dev \
+    bash
 
 WORKDIR /src
