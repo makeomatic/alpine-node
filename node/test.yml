@@ -16,7 +16,7 @@ metadataTest:
     - key: vendor
       value: makeomatic
     - key: version_tags
-      value: "[\"12\",\"12.13\",\"12.13.1\"]"
+      value: "[\"12\",\"12.14\",\"12.14.0\"]"
   entrypoint: ["docker-entrypoint.sh"]
   cmd: ["yarn", "start"]
   workdir: ""
