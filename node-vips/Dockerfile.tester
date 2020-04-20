@@ -7,7 +7,7 @@ RUN \
     fftw-dev \
     vips-dev \
     build-base \
-    python \
+    python3 \
     make \
     ca-certificates \
     openssl \

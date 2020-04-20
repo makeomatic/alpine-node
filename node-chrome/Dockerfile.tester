@@ -4,7 +4,7 @@ FROM makeomatic/node:$VERSION-chrome
 RUN \
   apk --no-cache add \
     build-base \
-    python \
+    python3 \
     make
 
 WORKDIR /src

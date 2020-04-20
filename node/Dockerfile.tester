@@ -4,7 +4,7 @@ FROM makeomatic/node:$VERSION
 RUN \
   apk --no-cache add \
     build-base \
-    python \
+    python3 \
     make \
     lz4-dev \
     musl-dev \
