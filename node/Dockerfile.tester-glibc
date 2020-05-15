@@ -7,6 +7,7 @@ RUN \
   apk --no-cache add \
     build-base \
     python3 \
+    python2 \
     make \
     ca-certificates \
     openssl \

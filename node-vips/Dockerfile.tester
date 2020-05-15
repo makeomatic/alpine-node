@@ -8,6 +8,7 @@ RUN \
     vips-dev \
     build-base \
     python3 \
+    python2 \
     make \
     ca-certificates \
     openssl \
