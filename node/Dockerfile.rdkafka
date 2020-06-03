@@ -22,7 +22,7 @@ RUN \
     libsasl \
     cyrus-sasl-dev \
     openssl-dev \
-    python \
+    python2 \
   && wget https://github.com/edenhill/librdkafka/archive/v${LIBRDKAFKA_VER}.tar.gz \
   && tar -xvf v${LIBRDKAFKA_VER}.tar.gz \
   && cd librdkafka-${LIBRDKAFKA_VER} \
