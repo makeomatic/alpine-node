@@ -7,7 +7,8 @@ RUN \
     fftw-dev \
     vips-dev \
     build-base \
-    python \
+    python3 \
+    python2 \
     make \
     ca-certificates \
     openssl \
@@ -15,13 +16,13 @@ RUN \
     g++ \
     linux-headers \
     py-pip \
-    python-dev \
+    python3-dev \
     libffi-dev \
     openssl-dev \
     gcc \
     libc-dev \
     curl \
-  && curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-19.03.2.tgz | tar --strip-components=1 -xvzf - -C /bin docker/docker \
+  && curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-19.03.8.tgz | tar --strip-components=1 -xvzf - -C /bin docker/docker \
   && pip install docker-compose \
   && rm -rf \
     /etc/apk/cache/* \

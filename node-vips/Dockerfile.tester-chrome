@@ -1,6 +1,6 @@
 FROM makeomatic/node:$VERSION-vips-tester
 
-# Installs latest Chromium (76) package.
+# Installs latest Chromium (80) package.
 RUN \
   apk --no-cache upgrade \
   && apk --no-cache add \

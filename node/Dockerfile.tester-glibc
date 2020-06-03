@@ -6,7 +6,8 @@ ENV GLIBC_VER 2.26-r0
 RUN \
   apk --no-cache add \
     build-base \
-    python \
+    python3 \
+    python2 \
     make \
     ca-certificates \
     openssl \

@@ -36,5 +36,5 @@ blocks:
       jobs:
       - name: nodejs
         commands:
-          - ./build.sh -f node/Dockerfile -t test -v 12.13.1
+          - ./build.sh -f node/Dockerfile -t test -v 12.16.3
           - container-structure-test test --image test --config node/test.yml

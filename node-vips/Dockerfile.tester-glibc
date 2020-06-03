@@ -1,6 +1,6 @@
 FROM makeomatic/node:$VERSION-vips-tester
 
-ENV GLIBC_VER 2.26-r0
+ENV GLIBC_VER 2.31-r0
 
 # to build native deps
 RUN \
