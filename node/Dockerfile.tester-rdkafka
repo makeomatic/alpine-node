@@ -1,0 +1,3 @@
+FROM makeomatic/node:$VERSION-rdkafka
+
+WORKDIR /src
