@@ -13,7 +13,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "14.2.0"
+        value: "14.4.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -30,7 +30,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "14.2.0"
+        value: "14.4.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -56,13 +56,16 @@ blocks:
         - name: vips
           commands:
             - ./build.sh -a vips -f node-vips/Dockerfile -v $NODE_VERSION -p
+        - name: rdkafka
+          commands:
+            - ./build.sh -a rdkafka -f node/Dockerfile.rdkafka -v $NODE_VERSION -p
 
 ### 2) build and publish images which has previous dependencies
   - name: Dependent images - 1
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "14.2.0"
+        value: "14.4.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -91,13 +94,16 @@ blocks:
         - name: vips-ssh
           commands:
             - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
+        - name: rdkafka-tester
+          commands:
+            - ./build.sh -a rdkafka-tester -f node/Dockerfile.tester-rdkafka -v $NODE_VERSION -p
 
 ### 3) build and publish images which has previous dependencies
   - name: Dependent images - 2
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "14.2.0"
+        value: "14.4.0"
       secrets:
       - name: docker-hub
       prologue:
