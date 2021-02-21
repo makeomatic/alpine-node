@@ -13,7 +13,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "15.6.0"
+        value: "15.9.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -30,7 +30,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "15.6.0"
+        value: "15.9.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -65,7 +65,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "15.6.0"
+        value: "15.9.0"
       secrets:
       - name: docker-hub
       prologue:
@@ -103,7 +103,7 @@ blocks:
     task:
       env_vars:
       - name: NODE_VERSION
-        value: "15.6.0"
+        value: "15.9.0"
       secrets:
       - name: docker-hub
       prologue:
