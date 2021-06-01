@@ -31,7 +31,7 @@ rm -rf ./*.log
 docker-build $BASE_NAME -f node/Dockerfile .
 docker-build -v "onbuild" $BASE_NAME -f node/Dockerfile.onbuild .
 docker-build -v "tester" $BASE_NAME -f node/Dockerfile.tester .
-docker-build -v "tester-glibc" $BASE_NAME -f node/Dockerfile.tester-glibc .
+#docker-build -v "tester-glibc" $BASE_NAME -f node/Dockerfile.tester-glibc .
 # build node images with ruby
 # docker-build -v "ruby" $BASE_NAME -f node-ruby/Dockerfile .
 # build node images with ssh embedded
@@ -45,7 +45,7 @@ docker-build -v "chrome-tester" $BASE_NAME -f node-chrome/Dockerfile.tester .
 docker-build -v "vips" $BASE_NAME -f node-vips/Dockerfile .
 docker-build -v "vips-onbuild" $BASE_NAME -f node-vips/Dockerfile.onbuild .
 docker-build -v "vips-tester" $BASE_NAME -f node-vips/Dockerfile.tester .
-docker-build -v "vips-tester-glibc" $BASE_NAME -f node-vips/Dockerfile.tester-glibc .
+#docker-build -v "vips-tester-glibc" $BASE_NAME -f node-vips/Dockerfile.tester-glibc .
 docker-build -v "vips-tester-chrome" $BASE_NAME -f node-vips/Dockerfile.tester-chrome .
 # build node images with libvips & ssh
 docker-build -v "vips-ssh" $BASE_NAME -f node-vips-ssh/Dockerfile .

@@ -44,9 +44,6 @@ blocks:
         - name: tester
           commands:
             - ./build.sh -a tester -f node/Dockerfile.tester -v $NODE_VERSION -p
-        - name: tester-glibc
-          commands:
-            - ./build.sh -a tester-glibc -f node/Dockerfile.tester-glibc -v $NODE_VERSION -p
         - name: ssh
           commands:
             - ./build.sh -a ssh -f node-ssh/Dockerfile -v $NODE_VERSION -p
@@ -111,9 +108,6 @@ blocks:
           - checkout
           - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
       jobs:
-        - name: vips-tester-glibc
-          commands:
-            - ./build.sh -a vips-tester-glibc -f node-vips/Dockerfile.tester-glibc -v $NODE_VERSION -p
         - name: vips-tester-chrome
           commands:
             - ./build.sh -a vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -v $NODE_VERSION -p

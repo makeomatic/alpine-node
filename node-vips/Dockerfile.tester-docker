@@ -22,8 +22,7 @@ RUN \
     gcc \
     libc-dev \
     curl \
-  && curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-19.03.8.tgz | tar --strip-components=1 -xvzf - -C /bin docker/docker \
-  && pip install docker-compose \
+  && curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-20.10.6.tgz | tar --strip-components=1 -xvzf - -C /bin docker/docker \
   && rm -rf \
     /etc/apk/cache/* \
     /var/cache/apk/*
