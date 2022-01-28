@@ -1,42 +1,16 @@
 FROM makeomatic/node:$VERSION
 
-ENV LIBRDKAFKA_VER 1.8.2
-
 # set flag to disable rebuilding librdkafka on node-rdkafka package build
 ENV BUILD_LIBRDKAFKA=0
 
 RUN \
   apk --no-cache add \
-    bash \
-    ca-certificates \
-    g++ \
-    build-base \
-    make \
-    musl \
-    zlib \
-    zlib-dev \
-    lz4-libs \
-    lz4-dev \
-    musl \
-    musl-dev \
-    libsasl \
-    cyrus-sasl-dev \
-    openssl-dev \
-    python2 \
+    librdkafka \
+    librdkafka-dev \
     python3 \
-  && wget https://github.com/edenhill/librdkafka/archive/v${LIBRDKAFKA_VER}.tar.gz \
-  && tar -xvf v${LIBRDKAFKA_VER}.tar.gz \
-  && cd librdkafka-${LIBRDKAFKA_VER} \
-  && ./configure --install-deps && make && make install \
-  && rm -rf /v${LIBRDKAFKA_VER}.tar.gz /librdkafka-${LIBRDKAFKA_VER} \
-# cleanup
-  && apk del \
-    lz4-dev \
-    musl-dev \
-    cyrus-sasl-dev \
-    openssl-dev \
-    zlib-dev \
-    build-base \
+    make \
+    g++ \
+  # cleanup
   && rm -rf \
     /tmp/* \
     /var/cache/apk/*.tar.gz
