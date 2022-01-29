@@ -73,11 +73,11 @@ envsubst '${VERSION} ${VERSION_TAGS}' < $file > $tmpfile
 ### create temp container
 [ ! -z "$cache" ] && docker pull $cachename
 
-buildArgs=("--tag $tempname" "--file $tmpfile")
+buildArgs=("--tag $tempname")
 [ ! -z "$cache" ] && buildArgs+=("--cache-from $cachename")
 buildArgsStr=$(printf " %s" "${buildArgs[@]}")
 
-docker build $buildArgsStr .
+docker build $buildArgsStr - < $tmpfile
 rm $tmpfile
 
 ### generate tags based on image labels
