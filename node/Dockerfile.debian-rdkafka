@@ -4,7 +4,7 @@ FROM makeomatic/node:$VERSION-debian
 ENV BUILD_LIBRDKAFKA=0
 
 RUN \
-    wget -qO - https://packages.confluent.io/deb/7.0/archive.key | sudo apt-key add - \
+    wget -qO - https://packages.confluent.io/deb/7.0/archive.key | apt-key add - \
     && add-apt-repository --no-update "deb [arch=amd64] https://packages.confluent.io/deb/7.0 stable main" \
     && add-apt-repository --no-update "deb https://packages.confluent.io/clients/deb $(lsb_release -cs) main" \
     && apt-get update \
