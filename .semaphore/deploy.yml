@@ -84,68 +84,68 @@ blocks:
     dependencies: ["Core-dependent Images"]
     task:
       jobs:
-        - name: ssh-onbuild
-          matrix:
+      - name: ssh-onbuild
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a ssh-onbuild -f node-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
-        - name: chrome-onbuild
-          matrix:
+        commands:
+          - ./build.sh -a ssh-onbuild -f node-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
+      - name: chrome-onbuild
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a chrome-onbuild -f node-chrome/Dockerfile.onbuild -v $NODE_VERSION -p
-        - name: chrome-tester
-          matrix:
+        commands:
+          - ./build.sh -a chrome-onbuild -f node-chrome/Dockerfile.onbuild -v $NODE_VERSION -p
+      - name: chrome-tester
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a chrome-tester -f node-chrome/Dockerfile.tester -v $NODE_VERSION -p
-        - name: vips-onbuild
-          matrix:
+        commands:
+          - ./build.sh -a chrome-tester -f node-chrome/Dockerfile.tester -v $NODE_VERSION -p
+      - name: vips-onbuild
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a vips-onbuild -f node-vips/Dockerfile.onbuild -v $NODE_VERSION -p
-        - name: vips-tester
-          matrix:
+        commands:
+          - ./build.sh -a vips-onbuild -f node-vips/Dockerfile.onbuild -v $NODE_VERSION -p
+      - name: vips-tester
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a vips-tester -f node-vips/Dockerfile.tester -v $NODE_VERSION -p
-        - name: vips-tester-docker
-          matrix:
+        commands:
+          - ./build.sh -a vips-tester -f node-vips/Dockerfile.tester -v $NODE_VERSION -p
+      - name: vips-tester-docker
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a vips-tester-docker -f node-vips/Dockerfile.tester-docker -v $NODE_VERSION -p
-        - name: vips-ssh
-          matrix:
+        commands:
+          - ./build.sh -a vips-tester-docker -f node-vips/Dockerfile.tester-docker -v $NODE_VERSION -p
+      - name: vips-ssh
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
-        - name: rdkafka-tester
-          matrix:
+        commands:
+          - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
+      - name: rdkafka-tester
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a rdkafka-tester -f node/Dockerfile.tester-rdkafka -v $NODE_VERSION -p
+        commands:
+          - ./build.sh -a rdkafka-tester -f node/Dockerfile.tester-rdkafka -v $NODE_VERSION -p
 
   - name: Dependent images - 2
     dependencies: ["Dependent Images - 1"]
     task:
       jobs:
-        - name: vips-tester-chrome
-          matrix:
+      - name: vips-tester-chrome
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -v $NODE_VERSION -p
-        - name: vips-ssh-onbuild
-          matrix:
+        commands:
+          - ./build.sh -a vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -v $NODE_VERSION -p
+      - name: vips-ssh-onbuild
+        matrix:
         - env_var: NODE_VERSION
           values: ["16.13.2", "17.4.0"]
-          commands:
-            - ./build.sh -a vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
+        commands:
+          - ./build.sh -a vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
