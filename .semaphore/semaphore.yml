@@ -4,18 +4,11 @@ name: Test images
 agent:
   machine:
     type: e1-standard-2    # Linux machine type with 2 vCPUs, 4 GB of RAM
-    os_image: ubuntu1804   # The Ubuntu 18.04 OS image.
+    os_image: ubuntu2004   # The Ubuntu 18.04 OS image.
 
 promotions:
-- name: Deploy LTS
-  pipeline_file: deploy.lts.yml
-  auto_promote_on:
-    - result: passed
-      branch:
-        - ^master$
-
-- name: Deploy Latest
-  pipeline_file: deploy.latest.yml
+- name: Deploy
+  pipeline_file: deploy.yml
   auto_promote_on:
     - result: passed
       branch:

@@ -1,0 +1,97 @@
+version: v1.0
+name: Deploy LTS
+
+agent:
+  machine:
+    type: e1-standard-2    # Linux machine type with 2 vCPUs, 4 GB of RAM
+    os_image: ubuntu2004   # The Ubuntu 18.04 OS image.
+
+global_job_config:
+  secrets:
+  - name: docker-hub
+  prologue:
+    matrix:
+    - env_var: NODE_VERSION
+      values: ["16.13.2", "17.4.0"]
+    commands:
+    - checkout
+    - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
+### 1) build and publish core image first
+blocks:
+  - name: Core Images
+    dependencies: []
+    task:
+      jobs:
+      - name: alpine
+        commands:
+          - ./build.sh -f node/Dockerfile -v $NODE_VERSION -p
+      - name: debian
+        commands:
+          - ./build.sh -a debian -f node/Dockerfile.debian -v $NODE_VERSION -p
+
+  - name: Core-dependent Images
+    dependencies: ["Core Images"]
+    task:
+      jobs:
+      - name: onbuild
+        commands:
+          - ./build.sh -a onbuild -f node/Dockerfile.onbuild -v $NODE_VERSION -p
+      - name: tester
+        commands:
+          - ./build.sh -a tester -f node/Dockerfile.tester -v $NODE_VERSION -p
+      - name: ssh
+        commands:
+          - ./build.sh -a ssh -f node-ssh/Dockerfile -v $NODE_VERSION -p
+      - name: chrome
+        commands:
+          - ./build.sh -a chrome -f node-chrome/Dockerfile -v $NODE_VERSION -p
+      - name: vips
+        commands:
+          - ./build.sh -a vips -f node-vips/Dockerfile -v $NODE_VERSION -p
+      - name: rdkafka
+        commands:
+          - ./build.sh -a rdkafka -f node/Dockerfile.rdkafka -v $NODE_VERSION -p
+      - name: rdkafka-debian
+        commands:
+          - ./build.sh -a debian-rdkafka -f node/Dockerfile.debian-rdkafka -v $NODE_VERSION -p
+
+  - name: Dependent Images - 1
+    dependencies: ["Core-dependent Images"]
+    task:
+      jobs:
+        - name: ssh-onbuild
+          commands:
+            - ./build.sh -a ssh-onbuild -f node-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
+        - name: chrome-onbuild
+          commands:
+            - ./build.sh -a chrome-onbuild -f node-chrome/Dockerfile.onbuild -v $NODE_VERSION -p
+        - name: chrome-tester
+          commands:
+            - ./build.sh -a chrome-tester -f node-chrome/Dockerfile.tester -v $NODE_VERSION -p
+        - name: vips-onbuild
+          commands:
+            - ./build.sh -a vips-onbuild -f node-vips/Dockerfile.onbuild -v $NODE_VERSION -p
+        - name: vips-tester
+          commands:
+            - ./build.sh -a vips-tester -f node-vips/Dockerfile.tester -v $NODE_VERSION -p
+        - name: vips-tester-docker
+          commands:
+            - ./build.sh -a vips-tester-docker -f node-vips/Dockerfile.tester-docker -v $NODE_VERSION -p
+        - name: vips-ssh
+          commands:
+            - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
+        - name: rdkafka-tester
+          commands:
+            - ./build.sh -a rdkafka-tester -f node/Dockerfile.tester-rdkafka -v $NODE_VERSION -p
+
+  - name: Dependent images - 2
+    dependencies: ["Dependent Images - 1"]
+    task:
+      jobs:
+        - name: vips-tester-chrome
+          commands:
+            - ./build.sh -a vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -v $NODE_VERSION -p
+        - name: vips-ssh-onbuild
+          commands:
+            - ./build.sh -a vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
