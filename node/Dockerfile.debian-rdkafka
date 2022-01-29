@@ -1,24 +1,18 @@
 FROM makeomatic/node:$VERSION-debian
 
 # set flag to disable rebuilding librdkafka on node-rdkafka package build
-ENV BUILD_LIBRDKAFKA=0
+ENV BUILD_LIBRDKAFKA 0
+ENV LIBRDKAFKA_VER 1.8.2
 
 RUN \
-    apt-get update \
-    && apt-get install -yq software-properties-common \
-    && wget -qO - https://packages.confluent.io/deb/7.0/archive.key | apt-key add - \
-    && add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/7.0 stable main" \
-    && add-apt-repository "deb https://packages.confluent.io/clients/deb $(lsb_release -cs) main" \
-    && apt-get update \
-    && apt-get install -yq \
-      python3 \
-      make \
-      g++ \
-      librdkafka1 \
-      librdkafka++1 \
-      librdkafka-dev \  
-    # cleanup
-    && rm -rf \
-        /tmp/*
+  apt-get update \
+  && wget https://github.com/edenhill/librdkafka/archive/v${LIBRDKAFKA_VER}.tar.gz \
+  && tar -xvf v${LIBRDKAFKA_VER}.tar.gz \
+  && cd librdkafka-${LIBRDKAFKA_VER} \
+  && ./configure --install-deps && make && make install \
+  && rm -rf /v${LIBRDKAFKA_VER}.tar.gz /librdkafka-${LIBRDKAFKA_VER} \
+  # cleanup
+  && rm -rf \
+    /tmp/*
 
 WORKDIR /src
