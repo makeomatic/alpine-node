@@ -11,6 +11,7 @@ RUN \
   && cd librdkafka-${LIBRDKAFKA_VER} \
   && ./configure --install-deps && make && make install \
   && rm -rf /v${LIBRDKAFKA_VER}.tar.gz /librdkafka-${LIBRDKAFKA_VER} \
+  && ldconfig \
   # cleanup
   && rm -rf \
     /tmp/*
