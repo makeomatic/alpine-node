@@ -23,13 +23,13 @@ blocks:
       - name: alpine
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -f node/Dockerfile -v $NODE_VERSION -p
       - name: debian
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a debian -f node/Dockerfile.debian -v $NODE_VERSION -p
 
@@ -40,43 +40,43 @@ blocks:
       - name: onbuild
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a onbuild -f node/Dockerfile.onbuild -v $NODE_VERSION -p
       - name: tester
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a tester -f node/Dockerfile.tester -v $NODE_VERSION -p
       - name: ssh
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a ssh -f node-ssh/Dockerfile -v $NODE_VERSION -p
       - name: chrome
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a chrome -f node-chrome/Dockerfile -v $NODE_VERSION -p
       - name: vips
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips -f node-vips/Dockerfile -v $NODE_VERSION -p
       - name: rdkafka
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a rdkafka -f node/Dockerfile.rdkafka -v $NODE_VERSION -p
       - name: rdkafka-debian
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a debian-rdkafka -f node/Dockerfile.debian-rdkafka -v $NODE_VERSION -p
 
@@ -87,49 +87,49 @@ blocks:
       - name: ssh-onbuild
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a ssh-onbuild -f node-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
       - name: chrome-onbuild
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a chrome-onbuild -f node-chrome/Dockerfile.onbuild -v $NODE_VERSION -p
       - name: chrome-tester
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a chrome-tester -f node-chrome/Dockerfile.tester -v $NODE_VERSION -p
       - name: vips-onbuild
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips-onbuild -f node-vips/Dockerfile.onbuild -v $NODE_VERSION -p
       - name: vips-tester
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips-tester -f node-vips/Dockerfile.tester -v $NODE_VERSION -p
       - name: vips-tester-docker
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips-tester-docker -f node-vips/Dockerfile.tester-docker -v $NODE_VERSION -p
       - name: vips-ssh
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips-ssh -f node-vips-ssh/Dockerfile -v $NODE_VERSION -p
       - name: rdkafka-tester
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a rdkafka-tester -f node/Dockerfile.tester-rdkafka -v $NODE_VERSION -p
 
@@ -140,12 +140,12 @@ blocks:
       - name: vips-tester-chrome
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips-tester-chrome -f node-vips/Dockerfile.tester-chrome -v $NODE_VERSION -p
       - name: vips-ssh-onbuild
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.14.2", "17.8.0"]
+          values: ["16.15.1", "18.4.0"]
         commands:
           - ./build.sh -a vips-ssh-onbuild -f node-vips-ssh/Dockerfile.onbuild -v $NODE_VERSION -p
