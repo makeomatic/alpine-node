@@ -11,7 +11,8 @@ RUN apk --no-cache upgrade \
    && rm -rf /var/cache/* \
    && mkdir /var/cache/apk \
    && mkdir -p /usr/src/app \
-   && adduser -D chrome \
+   && addgroup chrome \
+   && adduser -D chrome -G chrome \
    && chown -R chrome:chrome /usr/src/app
 
 ENV CHROME_BIN=/usr/bin/chromium-browser \
