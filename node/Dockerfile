@@ -1,8 +1,5 @@
-FROM node:$VERSION-alpine
+FROM node
 
 # installs pnpm package manager
 RUN \
-    wget -qO- https://get.pnpm.io/install.sh | sh -
-
-LABEL vendor=makeomatic \
-    version_tags="$VERSION_TAGS"
+    npm install --location=global pnpm

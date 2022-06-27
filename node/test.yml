@@ -10,13 +10,10 @@ commandTests:
     command: which
     args: ["yarn"]
     expectedOutput: ["/usr/local/bin/yarn"]
+  - name: pnpm
+    command: which
+    args: ["pnpm"]
+    expectedOutput: ["/usr/local/bin/pnpm"]
 
 metadataTest:
-  labels:
-    - key: vendor
-      value: makeomatic
-    - key: version_tags
-      value: "[\"12\",\"12.16\",\"12.16.3\"]"
-  entrypoint: ["docker-entrypoint.sh"]
-  cmd: ["yarn", "start"]
   workdir: ""

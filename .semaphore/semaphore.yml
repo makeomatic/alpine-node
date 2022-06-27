@@ -28,6 +28,9 @@ blocks:
 
       jobs:
       - name: nodejs
+        matrix:
+        - env_var: NODE_VERSION
+          values: ["16.15.1", "18.4.0"]
         commands:
-          - ./build.sh -f node/Dockerfile -t test -v 12.16.3
-          - container-structure-test test --image test --config node/test.yml
+          - docker buildx bake -f docker-bake.hcl alpine --load --set="*.platform=linux/amd64"
+          - container-structure-test test --image makeomatic/node:$NODE_VERSION --config node/test.yml
