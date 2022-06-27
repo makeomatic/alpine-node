@@ -2,4 +2,4 @@ FROM node
 
 # installs pnpm package manager
 RUN \
-    npm install --location=global pnpm
+    node `which npm` install --location=global pnpm
