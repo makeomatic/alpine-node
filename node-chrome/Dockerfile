@@ -1,4 +1,4 @@
-FROM makeomatic/node:$VERSION
+FROM makeomatic/node
 
 # Installs latest Chromium (76) package.
 RUN apk --no-cache upgrade \
@@ -9,10 +9,8 @@ RUN apk --no-cache upgrade \
       harfbuzz \
       freetype \
    && rm -rf /var/cache/* \
-   && mkdir /var/cache/apk
-
-# Add Chrome as a user
-RUN mkdir -p /usr/src/app \
+   && mkdir /var/cache/apk \
+   && mkdir -p /usr/src/app \
    && adduser -D chrome \
    && chown -R chrome:chrome /usr/src/app
 

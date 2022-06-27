@@ -1,11 +1,10 @@
-FROM makeomatic/node:$VERSION-chrome
+FROM makeomatic/node
 
 # to build native deps
 RUN \
   apk --no-cache add \
     build-base \
     python3 \
-    python2 \
     make
 
 WORKDIR /src
