@@ -30,6 +30,7 @@ group "default" {
   targets = [
     "alpine", 
     "debian", 
+    "debian-rdkafka",
     "alpine-rdkafka", 
     "alpine-tester", 
     "alpine-tester-rdkafka",
