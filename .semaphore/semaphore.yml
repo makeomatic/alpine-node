@@ -32,5 +32,6 @@ blocks:
         - env_var: NODE_VERSION
           values: ["16.15.1", "18.4.0"]
         commands:
+          - docker buildx create --use
           - docker buildx bake -f docker-bake.hcl alpine --load --set="*.platform=linux/amd64"
           - container-structure-test test --image makeomatic/node:$NODE_VERSION --config node/test.yml
