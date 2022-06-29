@@ -27,3 +27,11 @@ blocks:
         commands:
           - docker buildx create --use
           - docker buildx bake -f docker-bake.hcl --pull --push
+  - name: Redis Images
+    dependencies: []
+    task:
+      jobs:
+      - name: redis images
+        commands:
+          - docker buildx create --use
+          - docker buildx bake -f docker-bake.redis.hcl --pull --push
