@@ -25,6 +25,7 @@ blocks:
         - env_var: NODE_VERSION
           values: ["16.15.1", "18.4.0"]
         commands:
+          - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
           - docker buildx bake -f docker-bake.hcl --pull --push
   - name: Redis Images
@@ -33,5 +34,6 @@ blocks:
       jobs:
       - name: redis images
         commands:
+          - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
           - docker buildx bake -f docker-bake.redis.hcl --pull --push
