@@ -28,15 +28,39 @@ function "ver_tags" {
 
 group "default" {
   targets = [
+    "base-containers",
+    "rdkafka",
+    "ssh",
+    "chrome-containers",
+    "vips-containers",
+  ]
+}
+
+group "base-containers" {
+  targets = [
     "alpine", 
     "debian", 
+    "alpine-tester"
+  ]
+}
+
+group "rdkafka" {
+  targets = [
     "debian-rdkafka",
-    "alpine-rdkafka", 
-    "alpine-tester", 
-    "alpine-tester-rdkafka",
+    "alpine-rdkafka",
+    "alpine-tester-rdkafka"
+  ]
+}
+
+group "chrome-containers" {
+  targets = [
     "chrome",
-    "chrome-tester",
-    "ssh",
+    "chrome-tester"
+  ]
+}
+
+group "vips-containers" {
+  targets = [
     "vips",
     "vips-tester",
     "vips-tester-chrome",

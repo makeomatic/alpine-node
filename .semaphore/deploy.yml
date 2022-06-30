@@ -27,7 +27,32 @@ blocks:
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
-          - docker buildx bake -f docker-bake.hcl --pull --push
+          - docker buildx bake -f docker-bake.hcl --pull --push base-containers
+  - name: vips, chrome, ssh
+    dependencies: ['Core Images']
+    task:
+      jobs:
+      - name: vips, chrome, ssh
+        matrix:
+        - env_var: NODE_VERSION
+          values: ["16.15.1", "18.4.0"]
+        commands:
+          - docker run --privileged --rm tonistiigi/binfmt --install all
+          - docker buildx create --use
+          - docker buildx bake -f docker-bake.hcl --pull --push chrome-containers vips-containers ssh
+
+  - name: rdkafka
+    dependencies: ['Core Images']
+    task:
+      jobs:
+      - name: rdkafka images
+        matrix:
+        - env_var: NODE_VERSION
+          values: ["16.15.1", "18.4.0"]
+        commands:
+          - docker run --privileged --rm tonistiigi/binfmt --install all
+          - docker buildx create --use
+          - docker buildx bake -f docker-bake.hcl --pull --push rdkafka
   - name: Redis Images
     dependencies: []
     task:
