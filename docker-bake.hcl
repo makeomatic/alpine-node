@@ -29,7 +29,8 @@ function "ver_tags" {
 group "default" {
   targets = [
     "base-containers",
-    "rdkafka",
+    "alpine-rdkafka",
+    "debian-rdkafka",
     "ssh",
     "chrome-containers",
     "vips-containers",
@@ -44,9 +45,8 @@ group "base-containers" {
   ]
 }
 
-group "rdkafka" {
+group "alpine-rdkafka" {
   targets = [
-    "debian-rdkafka",
     "alpine-rdkafka",
     "alpine-tester-rdkafka"
   ]

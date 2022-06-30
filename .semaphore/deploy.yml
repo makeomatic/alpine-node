@@ -39,9 +39,9 @@ blocks:
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
-          - docker buildx bake -f docker-bake.hcl --pull --push chrome-containers vips-containers ssh
+          - docker buildx bake -f docker-bake.hcl --pull --push chrome-containers vips-containers ssh alpine-rdkafka
 
-  - name: rdkafka
+  - name: debian rdkafka
     dependencies: ['Core Images']
     task:
       jobs:
@@ -52,7 +52,8 @@ blocks:
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
-          - docker buildx bake -f docker-bake.hcl --pull --push rdkafka
+          - docker buildx bake -f docker-bake.hcl --pull --push debian-rdkafka
+
   - name: Redis Images
     dependencies: []
     task:
