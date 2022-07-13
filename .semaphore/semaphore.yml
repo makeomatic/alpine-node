@@ -30,7 +30,7 @@ blocks:
       - name: nodejs
         matrix:
         - env_var: NODE_VERSION
-          values: ["16.15.1", "18.4.0"]
+          values: ["16.16.0", "18.5.0"]
         commands:
           - docker buildx create --use
           - docker buildx bake -f docker-bake.hcl alpine --load --set="*.platform=linux/amd64"
