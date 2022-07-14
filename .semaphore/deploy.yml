@@ -50,7 +50,7 @@ blocks:
         - env_var: NODE_VERSION
           values: ["16.16.0", "18.5.0"]
         - env_var: PLATFORM
-          values: ["linux/amd64", "linux/arm64"]
+          values: ["linux/amd64"]
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
