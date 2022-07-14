@@ -107,6 +107,7 @@ target "debian-rdkafka" {
   inherits = ["base"]
   dockerfile = "./node/Dockerfile.debian-rdkafka"
   tags = ver_tags(BASE, NODE_VERSION, "debian-rdkafka")
+  platforms = ["linux/amd64"]
   contexts = {
     "makeomatic/node" = "target:debian"
   }
@@ -126,7 +127,7 @@ target "alpine-tester" {
 target "alpine-tester-rdkafka" {
   inherits = ["base"]
   dockerfile = "./node/Dockerfile.tester-rdkafka"
-  tags = ver_tags(BASE, NODE_VERSION, "tester-rdkafka")
+  tags = ver_tags(BASE, NODE_VERSION, "rdkafka-tester")
   contexts = {
     "makeomatic/node" = "target:alpine-rdkafka"
   }
