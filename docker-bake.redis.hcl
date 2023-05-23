@@ -15,6 +15,6 @@ target "redis-cluster" {
     "docker.io/makeomatic/redis-stack-cluster:6"
   ]
   contexts = {
-    "redis/redis-stack-server": "docker-image://redis/redis-stack-server:6.2.4-v2"
+    "redis/redis-stack-server": "docker-image://redis/redis-stack-server:6.2.6-v7"
   }
 }
