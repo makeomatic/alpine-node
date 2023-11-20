@@ -54,7 +54,7 @@ blocks:
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
-          - docker buildx bake -f docker-bake.hcl --pull --push --set "*.platform=$PLATFORM" debian-rdkafka
+          - docker buildx bake -f docker-bake.hcl --pull --push debian-rdkafka
 
   - name: Redis Images
     dependencies: []
