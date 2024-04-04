@@ -23,7 +23,7 @@ blocks:
       - name: all images
         matrix:
         - env_var: NODE_VERSION
-          values: ["20.12.0", "21.7.1"]
+          values: ["20.12.1", "21.7.2"]
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
@@ -35,7 +35,7 @@ blocks:
       - name: vips, chrome, ssh
         matrix:
         - env_var: NODE_VERSION
-          values: ["20.12.0", "21.7.1"]
+          values: ["20.12.1", "21.7.2"]
         commands:
           - docker run --privileged --rm tonistiigi/binfmt --install all
           - docker buildx create --use
@@ -48,7 +48,7 @@ blocks:
       - name: rdkafka images
         matrix:
         - env_var: NODE_VERSION
-          values: ["20.12.0", "21.7.1"]
+          values: ["20.12.1", "21.7.2"]
         # - env_var: PLATFORM
         #   values: ["linux/amd64"]
         commands:
