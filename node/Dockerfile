@@ -2,6 +2,8 @@ FROM node
 
 RUN corepack enable \
     && corepack install --global pnpm@8.x \
+    && su node -c 'corepack enable' \
+    && su node -c 'corepack install --global pnpm@8.x' \
     && su node -c 'pnpm config set global-bin-dir "/usr/local/bin"' \
     && su node -c 'rm -rf ~/.cache ~/.npm' \
     && rm -rf ~/.npm \
