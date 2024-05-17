@@ -8,7 +8,8 @@ ENV COREPACK_DEFAULT_TO_LATEST=0 \
     COREPACK_HOME=/usr/local/src/corepack
 
 RUN \
-    mkdir -p -g node $COREPACK_HOME \
+    mkdir -p $COREPACK_HOME \
+    && chown root:node $COREPACK_HOME \
     && corepack enable \
     && COREPACK_ENABLE_NETWORK=1 corepack install --global pnpm@8.x \
     && su node -c 'pnpm config set global-bin-dir "/usr/local/bin"' \
