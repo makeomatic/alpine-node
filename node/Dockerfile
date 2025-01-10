@@ -11,7 +11,7 @@ RUN \
     mkdir -p $COREPACK_HOME \
     && chown root:node $COREPACK_HOME \
     && corepack enable \
-    && COREPACK_ENABLE_NETWORK=1 corepack install --global pnpm@8.x \
+    && COREPACK_ENABLE_NETWORK=1 corepack install --global pnpm@9.x \
     && su node -c 'pnpm config set global-bin-dir "/usr/local/bin"' \
     && su node -c 'rm -rf ~/.cache ~/.npm' \
     && rm -rf ~/.npm \
