@@ -2,7 +2,7 @@ FROM makeomatic/node
 
 # set flag to disable rebuilding librdkafka on node-rdkafka package build
 ENV BUILD_LIBRDKAFKA 0
-ENV LIBRDKAFKA_VER 2.3.0
+ENV LIBRDKAFKA_VER 2.6.1
 
 RUN \
   apt-get update \
